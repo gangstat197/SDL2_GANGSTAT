@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -19,7 +19,30 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LazyFooMaterials\02_getting_an_image_on_the_screen\02_getting_an_image_on_the_screen.cpp" />
+    <ClCompile Include="SRC\Core\Game.cpp" />
+    <ClCompile Include="SRC\Core\main.cpp" />
+    <ClCompile Include="SRC\Core\Renderer.cpp" />
+    <ClCompile Include="SRC\Entities\BaseUnit.cpp" />
+    <ClCompile Include="SRC\Utils\AudioManager.cpp" />
+    <ClCompile Include="SRC\Utils\Input.cpp" />
+    <ClCompile Include="SRC\Utils\MathUtils.cpp" />
+    <ClCompile Include="SRC\Utils\Messages.cpp" />
+    <ClCompile Include="SRC\Utils\TextureManager.cpp" />
+    <ClCompile Include="SRC\Utils\Timer.cpp" />
+    <ClCompile Include="SRC\Utils\Vector2D.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="INCLUDE\Core\Game.h" />
+    <ClInclude Include="INCLUDE\Core\Renderer.h" />
+    <ClInclude Include="INCLUDE\Entities\BaseUnit.h" />
+    <ClInclude Include="INCLUDE\Utils\AudioManager.h" />
+    <ClInclude Include="INCLUDE\Utils\Input.h" />
+    <ClInclude Include="INCLUDE\Utils\MathUtils.h" />
+    <ClInclude Include="INCLUDE\Utils\Messages.h" />
+    <ClInclude Include="INCLUDE\Utils\TextureManager.h" />
+    <ClInclude Include="INCLUDE\Utils\Timer.h" />
+    <ClInclude Include="INCLUDE\Utils\Vector2D.h" />
+    <ClInclude Include="settings.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -74,7 +97,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\vclib\SDL2_image-2.8.2\include;C:\vclib\SDL2-2.30.11\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\vclib\SDL2_image-2.8.2\include;C:\vclib\SDL2-2.30.11\include;C:\vclib\SDL2_ttf-2.24.0\include;C:\vclib\SDL2_mixer-2.8.1\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -110,13 +133,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\vclib\SDL2-2.30.11\include;C:\vclib\SDL2_mixer-2.8.1\include;C:\vclib\SDL2_image-2.8.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\vclib\SDL2-2.30.11\include;C:\vclib\SDL2_mixer-2.8.1\include;C:\vclib\SDL2_image-2.8.2\include;C:\vclib\SDL2_ttf-2.24.0\include;D:\3. Project\3. Games\2. ADVANCED PROGRAMMING\SDL2_GANGSTAT\INCLUDE;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_mixer.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\vclib\SDL2-2.30.11\lib\x64;C:\vclib\SDL2_mixer-2.8.1\lib\x64;C:\vclib\SDL2_image-2.8.2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_mixer.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\vclib\SDL2-2.30.11\lib\x64;C:\vclib\SDL2_mixer-2.8.1\lib\x64;C:\vclib\SDL2_image-2.8.2\lib\x64;C:\vclib\SDL2_ttf-2.24.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

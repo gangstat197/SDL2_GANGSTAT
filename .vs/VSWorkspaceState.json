@@ -1,7 +1,14 @@
 {
   "ExpandedNodes": [
     "",
-    "\\SDL2_GANGSTAT\\x64"
+    "\\INCLUDE",
+    "\\LazyFooMaterials",
+    "\\SDL2_GANGSTAT",
+    "\\SDL2_GANGSTAT\\x64",
+    "\\SRC",
+    "\\SRC\\Core",
+    "\\SRC\\Entities",
+    "\\SRC\\Utils"
   ],
   "SelectedNode": "\\SDL2_GANGSTAT.sln",
   "PreviewInSolutionExplorer": false
