@@ -21,7 +21,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LazyFooMaterials\06_extension_libraries_and_loading_other_image_formats\06_extension_libraries_and_loading_other_image_formats.cpp">
+    <ClCompile Include="LazyFooMaterials\02_getting_an_image_on_the_screen\02_getting_an_image_on_the_screen.cpp">
       <Filter>LazyFoo_Learn</Filter>
     </ClCompile>
   </ItemGroup>

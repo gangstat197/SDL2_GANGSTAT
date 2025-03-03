@@ -58,7 +58,7 @@ bool init()
 			int imgFlags = IMG_INIT_PNG;
 			if( !( IMG_Init( imgFlags ) & imgFlags ) )
 			{
-				printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
+				printf( "SDL_image could not initialize! SDL_i	mage Error: %s\n", IMG_GetError() );
 				success = false;
 			}
 			else
