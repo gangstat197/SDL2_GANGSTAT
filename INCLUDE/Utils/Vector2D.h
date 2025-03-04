@@ -11,9 +11,11 @@ public:
     Vector2D operator+(const Vector2D& other) const;
     Vector2D operator-(const Vector2D& other) const;
     Vector2D operator*(double scalar) const;
+    
     double operator*(const Vector2D& other) const;
     double magnitude() const;
     Vector2D normalize() const;
+    void print() const;
 
     double x;
     double y;

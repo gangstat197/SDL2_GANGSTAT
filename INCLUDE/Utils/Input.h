@@ -2,6 +2,7 @@
 #define INPUT_H
 
 #include <SDL.h>
+#include <Utils/Vector2D.h>
 
 class Input
 {
@@ -16,8 +17,8 @@ public:
     bool isMouseButtonPressed(Uint8 button);
     bool isMouseButtonReleased(Uint8 button);
     
-    int getMouseX();
-    int getMouseY();
+    void GetMouseState(Vector2D& mousePosition);
+    
 
 private:
     SDL_Event m_event;

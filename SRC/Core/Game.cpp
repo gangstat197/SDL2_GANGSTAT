@@ -1,9 +1,13 @@
-#include <Core/Game.h>
+﻿#include <Core/Game.h>
 #include <Core/Renderer.h>
 #include <Entities/Monster.h>
 #include <Utils/Input.h>
+#include <Utils/Vector2D.h>
+#include <Utils/SpriteSheet.h>
 
-Game::Game() : window(nullptr), renderer(nullptr), isRunning(false) {}
+#include <iostream>
+
+Game::Game() : input(nullptr), renderer(nullptr), isRunning(false) {}
 
 Game::~Game() {
     Clean();
@@ -16,51 +20,59 @@ bool Game::Init(const char* title, int width, int height) {
         return false;
     }
 
-    // Create the window
-    window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
-    if (window == nullptr) {
-        SDL_Log("Failed to create window: %s", SDL_GetError());
-        return false;
-    }
+    // Create graphic 
+    renderer = new Renderer(title, width, height);
 
-    // Create the renderer
-    renderer = new Renderer(window, width, height);
-    if (renderer == nullptr) {
-        SDL_Log("Failed to initialize renderer");
-        return false;
-    }
-
+    // Create input manager
+    input = new Input();
     isRunning = true;
     return true;
 }
 
 void Game::HandleEvents() {
     SDL_Event event;
+    Vector2D mousePosition;
+    //std::cerr << "Handling Events\n";
     while (SDL_PollEvent(&event)) {
+        input->GetMouseState(mousePosition);
         if (event.type == SDL_QUIT) {
             isRunning = false;
+            break;
         }
+
+        SDL_Delay(100);
     }
 }
 
 void Game::Update() {
-    // Update game logic here
+    // Update game logic 
 }
 
 void Game::Render() {
+    //std::cerr << "Rendering\n";
     // Clear the renderer
     renderer->Clear();
 
+    // Create Background
     backgroundTexture = renderer->LoadTexture("ASSETS/Images/Background_BottomBikini.jpg");
     renderer->RenderTexture(backgroundTexture, 0, 0);
 
-    Monster* monster = new Monster(100, 100, 100, 100, "ASSETS/Images/Test_Pokemon.png");
-    monster->Render(renderer);
+    // Test sprite sheet
+    SpriteSheet* spriteSheet = new SpriteSheet(renderer->GetSDLRenderer(), "ASSETS/Images/1_Pink_Monster/Pink_Monster_Attack1_4.png", 1, 4);
+    renderer->RenderSprite(spriteSheet, 100, 100, 0);
+
+    // Render all game entities
+    for (auto& entity : entities) {
+        entity->Render(renderer);
+    }
+    
     // Present the renderer
     renderer->Present();
 
-    // Clean up resources
-    monster->Clean();
+    // Destroy the sprite sheet texture
+    spriteSheet->DestroyTexture();
+    delete spriteSheet;
+    spriteSheet = nullptr;
 
     renderer->DestroyTexture(backgroundTexture);
     backgroundTexture = nullptr;
@@ -68,13 +80,15 @@ void Game::Render() {
 
 void Game::Clean() {
     // Clean up resources
+    for (auto& entity : entities) {
+		entity->Clean();
+		delete entity;
+	}
+    entities.clear();
+
     if (renderer) {
         delete renderer;
         renderer = nullptr;
-    }
-    if (window) {
-        SDL_DestroyWindow(window);
-        window = nullptr;
     }
     SDL_Quit();
 }

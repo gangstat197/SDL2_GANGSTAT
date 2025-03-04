@@ -3,16 +3,80 @@
   "WorkspaceRootPath": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Core\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:SRC\\Core\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Core\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:SRC\\Core\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\SpriteSheet.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:SRC\\Utils\\SpriteSheet.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\SpriteSheet.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Utils\\SpriteSheet.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Core\\Renderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Core\\Renderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Core\\Renderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:SRC\\Core\\Renderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Entities\\Monster.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Entities\\Monster.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Input.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Utils\\Input.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Core\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Core\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Input.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:SRC\\Utils\\Input.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Vector2D.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Utils\\Vector2D.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Entities\\BaseUnit.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:SRC\\Entities\\BaseUnit.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Entities\\BaseUnit.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Entities\\BaseUnit.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Vector2D.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:SRC\\Utils\\Vector2D.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Core\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:SRC\\Core\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\settings.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:settings.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\TextureManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Utils\\TextureManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Entities\\Monster.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:SRC\\Entities\\Monster.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Timer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Utils\\Timer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Messages.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Utils\\Messages.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\MathUtils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Utils\\MathUtils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Timer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -23,64 +87,8 @@
       "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:SRC\\Utils\\TextureManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Entities\\Monster.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:SRC\\Entities\\Monster.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Messages.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:SRC\\Utils\\Messages.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Core\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:SRC\\Core\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Core\\Renderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Core\\Renderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Messages.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Utils\\Messages.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\TextureManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Utils\\TextureManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Entities\\Monster.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Entities\\Monster.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Vector2D.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:SRC\\Utils\\Vector2D.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Vector2D.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Utils\\Vector2D.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Core\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Core\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Core\\Renderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:SRC\\Core\\Renderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Timer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Utils\\Timer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Input.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:INCLUDE\\Utils\\Input.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Input.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:SRC\\Utils\\Input.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\settings.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|solutionrelative:settings.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5E599DD1-EDAE-48AA-9DC7-DCF8647848EE}|SDL2_GANGSTAT.vcxproj|D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\AudioManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -93,8 +101,8 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "DockedWidth": 281,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -102,124 +110,85 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Monster.cpp",
-              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Entities\\Monster.cpp",
-              "RelativeDocumentMoniker": "SRC\\Entities\\Monster.cpp",
-              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Entities\\Monster.cpp",
-              "RelativeToolTip": "SRC\\Entities\\Monster.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
+              "DocumentIndex": 2,
+              "Title": "SpriteSheet.cpp",
+              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\SpriteSheet.cpp",
+              "RelativeDocumentMoniker": "SRC\\Utils\\SpriteSheet.cpp",
+              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\SpriteSheet.cpp",
+              "RelativeToolTip": "SRC\\Utils\\SpriteSheet.cpp",
+              "ViewState": "AQIAADUAAAAAAAAAAAAAAFQAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-04T15:50:16.852Z",
+              "WhenOpened": "2025-03-04T17:52:21.301Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "BaseUnit.cpp",
-              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Entities\\BaseUnit.cpp",
-              "RelativeDocumentMoniker": "SRC\\Entities\\BaseUnit.cpp",
-              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Entities\\BaseUnit.cpp",
-              "RelativeToolTip": "SRC\\Entities\\BaseUnit.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAYAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-03T15:54:22.761Z",
+              "DocumentIndex": 3,
+              "Title": "SpriteSheet.h",
+              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\SpriteSheet.h",
+              "RelativeDocumentMoniker": "INCLUDE\\Utils\\SpriteSheet.h",
+              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\SpriteSheet.h",
+              "RelativeToolTip": "INCLUDE\\Utils\\SpriteSheet.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-04T17:51:48.037Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
               "Title": "Renderer.h",
               "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Core\\Renderer.h",
               "RelativeDocumentMoniker": "INCLUDE\\Core\\Renderer.h",
               "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Core\\Renderer.h",
               "RelativeToolTip": "INCLUDE\\Core\\Renderer.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAuAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-03-03T14:27:49.641Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
+              "Title": "Renderer.cpp",
+              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Core\\Renderer.cpp",
+              "RelativeDocumentMoniker": "SRC\\Core\\Renderer.cpp",
+              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Core\\Renderer.cpp",
+              "RelativeToolTip": "SRC\\Core\\Renderer.cpp",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAAEAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-03T19:04:40.907Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Game.cpp",
               "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Core\\Game.cpp",
               "RelativeDocumentMoniker": "SRC\\Core\\Game.cpp",
               "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Core\\Game.cpp",
               "RelativeToolTip": "SRC\\Core\\Game.cpp",
-              "ViewState": "AQIAACcAAAAAAAAAAAAAAD4AAAAVAAAA",
+              "ViewState": "AQIAADYAAAAAAAAAAAAAAEoAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-03-03T14:52:12.56Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Timer.cpp",
-              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Timer.cpp",
-              "RelativeDocumentMoniker": "SRC\\Utils\\Timer.cpp",
-              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Timer.cpp",
-              "RelativeToolTip": "SRC\\Utils\\Timer.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 1,
+              "Title": "main.cpp",
+              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Core\\main.cpp",
+              "RelativeDocumentMoniker": "SRC\\Core\\main.cpp",
+              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Core\\main.cpp",
+              "RelativeToolTip": "SRC\\Core\\main.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-04T15:51:44.855Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TextureManager.cpp",
-              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\TextureManager.cpp",
-              "RelativeDocumentMoniker": "SRC\\Utils\\TextureManager.cpp",
-              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\TextureManager.cpp",
-              "RelativeToolTip": "SRC\\Utils\\TextureManager.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-03T16:03:10.914Z",
+              "WhenOpened": "2025-03-03T14:32:31.409Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Messages.cpp",
-              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Messages.cpp",
-              "RelativeDocumentMoniker": "SRC\\Utils\\Messages.cpp",
-              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Messages.cpp",
-              "RelativeToolTip": "SRC\\Utils\\Messages.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-03T15:19:34.731Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Messages.h",
-              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Messages.h",
-              "RelativeDocumentMoniker": "INCLUDE\\Utils\\Messages.h",
-              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Messages.h",
-              "RelativeToolTip": "INCLUDE\\Utils\\Messages.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-03-03T15:17:23.118Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "TextureManager.h",
-              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\TextureManager.h",
-              "RelativeDocumentMoniker": "INCLUDE\\Utils\\TextureManager.h",
-              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\TextureManager.h",
-              "RelativeToolTip": "INCLUDE\\Utils\\TextureManager.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-03-03T16:08:23.362Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
               "Title": "Monster.h",
               "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Entities\\Monster.h",
               "RelativeDocumentMoniker": "INCLUDE\\Entities\\Monster.h",
@@ -232,41 +201,93 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "main.cpp",
-              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Core\\main.cpp",
-              "RelativeDocumentMoniker": "SRC\\Core\\main.cpp",
-              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Core\\main.cpp",
-              "RelativeToolTip": "SRC\\Core\\main.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-03T14:32:31.409Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 8,
               "Title": "Game.h",
               "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Core\\Game.h",
               "RelativeDocumentMoniker": "INCLUDE\\Core\\Game.h",
               "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Core\\Game.h",
               "RelativeToolTip": "INCLUDE\\Core\\Game.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAMAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-03-03T14:28:34.061Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Renderer.cpp",
-              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Core\\Renderer.cpp",
-              "RelativeDocumentMoniker": "SRC\\Core\\Renderer.cpp",
-              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Core\\Renderer.cpp",
-              "RelativeToolTip": "SRC\\Core\\Renderer.cpp",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAAB4AAAAZAAAA",
+              "DocumentIndex": 10,
+              "Title": "Vector2D.h",
+              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Vector2D.h",
+              "RelativeDocumentMoniker": "INCLUDE\\Utils\\Vector2D.h",
+              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Vector2D.h",
+              "RelativeToolTip": "INCLUDE\\Utils\\Vector2D.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-03T15:44:46.048Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Vector2D.cpp",
+              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Vector2D.cpp",
+              "RelativeDocumentMoniker": "SRC\\Utils\\Vector2D.cpp",
+              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Vector2D.cpp",
+              "RelativeToolTip": "SRC\\Utils\\Vector2D.cpp",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAACcAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-03T19:04:40.907Z",
+              "WhenOpened": "2025-03-03T15:46:18.876Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "BaseUnit.cpp",
+              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Entities\\BaseUnit.cpp",
+              "RelativeDocumentMoniker": "SRC\\Entities\\BaseUnit.cpp",
+              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Entities\\BaseUnit.cpp",
+              "RelativeToolTip": "SRC\\Entities\\BaseUnit.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-03T15:54:22.761Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Input.h",
+              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Input.h",
+              "RelativeDocumentMoniker": "INCLUDE\\Utils\\Input.h",
+              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Input.h",
+              "RelativeToolTip": "INCLUDE\\Utils\\Input.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-03T15:47:21.438Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Input.cpp",
+              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Input.cpp",
+              "RelativeDocumentMoniker": "SRC\\Utils\\Input.cpp",
+              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Input.cpp",
+              "RelativeToolTip": "SRC\\Utils\\Input.cpp",
+              "ViewState": "AQIAADMAAAAAAAAAAAAAAEsAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-03T15:48:15.092Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Monster.cpp",
+              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Entities\\Monster.cpp",
+              "RelativeDocumentMoniker": "SRC\\Entities\\Monster.cpp",
+              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Entities\\Monster.cpp",
+              "RelativeToolTip": "SRC\\Entities\\Monster.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-04T15:50:16.852Z",
               "EditorCaption": ""
             },
             {
@@ -284,69 +305,98 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "TextureManager.h",
+              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\TextureManager.h",
+              "RelativeDocumentMoniker": "INCLUDE\\Utils\\TextureManager.h",
+              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\TextureManager.h",
+              "RelativeToolTip": "INCLUDE\\Utils\\TextureManager.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-03T16:08:23.362Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 13,
-              "Title": "Vector2D.h",
-              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Vector2D.h",
-              "RelativeDocumentMoniker": "INCLUDE\\Utils\\Vector2D.h",
-              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Vector2D.h",
-              "RelativeToolTip": "INCLUDE\\Utils\\Vector2D.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAGAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-03-03T15:44:46.048Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Vector2D.cpp",
-              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Vector2D.cpp",
-              "RelativeDocumentMoniker": "SRC\\Utils\\Vector2D.cpp",
-              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Vector2D.cpp",
-              "RelativeToolTip": "SRC\\Utils\\Vector2D.cpp",
-              "ViewState": "AQIAABUAAAAAAAAAAAAAACQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-03T15:46:18.876Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Input.cpp",
-              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Input.cpp",
-              "RelativeDocumentMoniker": "SRC\\Utils\\Input.cpp",
-              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Input.cpp",
-              "RelativeToolTip": "SRC\\Utils\\Input.cpp",
-              "ViewState": "AQIAAEAAAAAAAAAAAAAUwFEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-03T15:48:15.092Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Input.h",
-              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Input.h",
-              "RelativeDocumentMoniker": "INCLUDE\\Utils\\Input.h",
-              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Input.h",
-              "RelativeToolTip": "INCLUDE\\Utils\\Input.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-03-03T15:47:21.438Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
               "Title": "settings.h",
               "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\settings.h",
               "RelativeDocumentMoniker": "settings.h",
               "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\settings.h",
               "RelativeToolTip": "settings.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAcAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-03-03T14:51:11.701Z"
+              "WhenOpened": "2025-03-04T16:47:25.283Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Messages.h",
+              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Messages.h",
+              "RelativeDocumentMoniker": "INCLUDE\\Utils\\Messages.h",
+              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\Messages.h",
+              "RelativeToolTip": "INCLUDE\\Utils\\Messages.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-03T15:17:23.118Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "MathUtils.h",
+              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\MathUtils.h",
+              "RelativeDocumentMoniker": "INCLUDE\\Utils\\MathUtils.h",
+              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Utils\\MathUtils.h",
+              "RelativeToolTip": "INCLUDE\\Utils\\MathUtils.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-04T16:03:38.851Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Timer.cpp",
+              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Timer.cpp",
+              "RelativeDocumentMoniker": "SRC\\Utils\\Timer.cpp",
+              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Timer.cpp",
+              "RelativeToolTip": "SRC\\Utils\\Timer.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-04T15:51:44.855Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 20,
+              "Title": "TextureManager.cpp",
+              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\TextureManager.cpp",
+              "RelativeDocumentMoniker": "SRC\\Utils\\TextureManager.cpp",
+              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\TextureManager.cpp",
+              "RelativeToolTip": "SRC\\Utils\\TextureManager.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-03T16:03:10.914Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Messages.cpp",
+              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Messages.cpp",
+              "RelativeDocumentMoniker": "SRC\\Utils\\Messages.cpp",
+              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\Messages.cpp",
+              "RelativeToolTip": "SRC\\Utils\\Messages.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-03T15:19:34.731Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
               "Title": "AudioManager.cpp",
               "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\SRC\\Utils\\AudioManager.cpp",
               "RelativeDocumentMoniker": "SRC\\Utils\\AudioManager.cpp",
@@ -355,25 +405,6 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-03-03T16:03:12.175Z"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BaseUnit.h",
-              "DocumentMoniker": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Entities\\BaseUnit.h",
-              "RelativeDocumentMoniker": "INCLUDE\\Entities\\BaseUnit.h",
-              "ToolTip": "D:\\3. Project\\3. Games\\2. ADVANCED PROGRAMMING\\SDL2_GANGSTAT\\INCLUDE\\Entities\\BaseUnit.h",
-              "RelativeToolTip": "INCLUDE\\Entities\\BaseUnit.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-03-03T15:30:28.995Z",
-              "EditorCaption": ""
             }
           ]
         }

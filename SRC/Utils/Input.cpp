@@ -69,13 +69,9 @@ bool Input::isMouseButtonReleased(Uint8 button)
     return (m_mouseButtons & SDL_BUTTON(button)) == 0;
 }
 
-int Input::getMouseX()
-{
-    return m_mouseX;
+void Input::GetMouseState(Vector2D& mousePosition) {
+    int x, y; 
+    SDL_GetMouseState(&x, &y);
+    mousePosition = Vector2D(x, y);
+    mousePosition.print();
 }
-
-int Input::getMouseY()
-{
-    return m_mouseY;
-}
-

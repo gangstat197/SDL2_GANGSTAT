@@ -3,6 +3,6 @@
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
-const char* WINDOW_TITLE = "Trainer";
+const char* GAME_NAME = "Monster Trainer";
 
 #endif // !_DEFS__H

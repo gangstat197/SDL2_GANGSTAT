@@ -1,8 +1,2 @@
 ﻿  Game.cpp
-  BaseUnit.cpp
-D:\3. Project\3. Games\2. ADVANCED PROGRAMMING\SDL2_GANGSTAT\SRC\Entities\BaseUnit.cpp(18,58): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-D:\3. Project\3. Games\2. ADVANCED PROGRAMMING\SDL2_GANGSTAT\SRC\Entities\BaseUnit.cpp(18,46): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  Monster.cpp
-  Vector2D.cpp
-  Generating Code...
   SDL2_GANGSTAT.vcxproj -> D:\3. Project\3. Games\2. ADVANCED PROGRAMMING\SDL2_GANGSTAT\x64\Debug\SDL2_GANGSTAT.exe

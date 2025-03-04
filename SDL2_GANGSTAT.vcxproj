@@ -28,6 +28,7 @@
     <ClCompile Include="SRC\Utils\Input.cpp" />
     <ClCompile Include="SRC\Utils\MathUtils.cpp" />
     <ClCompile Include="SRC\Utils\Messages.cpp" />
+    <ClCompile Include="SRC\Utils\SpriteSheet.cpp" />
     <ClCompile Include="SRC\Utils\TextureManager.cpp" />
     <ClCompile Include="SRC\Utils\Timer.cpp" />
     <ClCompile Include="SRC\Utils\Vector2D.cpp" />
@@ -41,6 +42,7 @@
     <ClInclude Include="INCLUDE\Utils\Input.h" />
     <ClInclude Include="INCLUDE\Utils\MathUtils.h" />
     <ClInclude Include="INCLUDE\Utils\Messages.h" />
+    <ClInclude Include="INCLUDE\Utils\SpriteSheet.h" />
     <ClInclude Include="INCLUDE\Utils\TextureManager.h" />
     <ClInclude Include="INCLUDE\Utils\Timer.h" />
     <ClInclude Include="INCLUDE\Utils\Vector2D.h" />

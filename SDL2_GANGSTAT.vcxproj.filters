@@ -75,6 +75,9 @@
     <ClCompile Include="SRC\Entities\Monster.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="SRC\Utils\SpriteSheet.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="INCLUDE\Core\Game.h">
@@ -112,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="INCLUDE\Entities\Monster.h">
       <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="INCLUDE\Utils\SpriteSheet.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

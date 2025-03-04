@@ -2,8 +2,10 @@
 #define GAME_H
 
 #include <SDL.h>
-
-class Renderer; // Forward declaration
+#include <vector>
+#include <Entities/BaseUnit.h>
+#include <Core/Renderer.h>
+#include <Utils/Input.h>
 
 class Game {
 public:
@@ -18,10 +20,12 @@ public:
     bool IsRunning() const;
 
 private:
-    SDL_Window* window;
-    Renderer* renderer; // Raw pointer
+    Renderer* renderer; 
+    Input* input;
     SDL_Texture* backgroundTexture;
     bool isRunning;
+
+    std::vector<BaseUnit*> entities;
 };
 
 #endif // GAME_H

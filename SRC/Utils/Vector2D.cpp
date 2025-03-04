@@ -1,4 +1,5 @@
 #include <Utils/Vector2D.h>
+#include <iostream>
 #include <cmath>
 
 // Constructors
@@ -33,4 +34,8 @@ Vector2D Vector2D::normalize() const {
         return Vector2D(x / mag, y / mag);
     }
     return Vector2D();
+}
+
+void Vector2D::print() const {
+    std::cerr << x << ',' << y << '\n';
 }

@@ -1,11 +1,11 @@
 #include <Core/Game.h>
-#include <Core/settings.h>
 #include <iostream>
+#include "../../settings.h"
 
 int main(int argc, char* argv[]) {
     Game game;
 
-    if (!game.Init("Monster Trainer", SCREEN_WIDTH, SCREEN_HEIGHT)) {
+    if (!game.Init(GAME_NAME, SCREEN_WIDTH, SCREEN_HEIGHT)) {
         std::cout << "Failed to initialize game" << std::endl;
         return -1;
     }
