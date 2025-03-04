@@ -1,5 +1,6 @@
 #include <Core/Game.h>
 #include <Core/Renderer.h>
+#include <Entities/Monster.h>
 #include <Utils/Input.h>
 
 Game::Game() : window(nullptr), renderer(nullptr), isRunning(false) {}
@@ -53,15 +54,13 @@ void Game::Render() {
     backgroundTexture = renderer->LoadTexture("ASSETS/Images/Background_BottomBikini.jpg");
     renderer->RenderTexture(backgroundTexture, 0, 0);
 
-    SDL_Texture* texture = renderer->LoadTexture("ASSETS/Images/Test_Pokemon.png");
-    renderer->RenderTexture(texture, 800 / 2, 600 / 2);
-
+    Monster* monster = new Monster(100, 100, 100, 100, "ASSETS/Images/Test_Pokemon.png");
+    monster->Render(renderer);
     // Present the renderer
     renderer->Present();
 
     // Clean up resources
-    renderer->DestroyTexture(texture); // Ensure texture is destroyed after use
-    texture = nullptr;
+    monster->Clean();
 
     renderer->DestroyTexture(backgroundTexture);
     backgroundTexture = nullptr;
