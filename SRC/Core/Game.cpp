@@ -25,23 +25,17 @@ bool Game::Init(const char* title, int width, int height) {
 
     // Create input manager
     input = new Input();
+
+    // Set frame count to 0
+    frameCount = 0;
+
+    // Set running state 
     isRunning = true;
     return true;
 }
 
 void Game::HandleEvents() {
-    SDL_Event event;
-    Vector2D mousePosition;
-    //std::cerr << "Handling Events\n";
-    while (SDL_PollEvent(&event)) {
-        input->GetMouseState(mousePosition);
-        if (event.type == SDL_QUIT) {
-            isRunning = false;
-            break;
-        }
-
-        SDL_Delay(100);
-    }
+    input->HandleEvents();
 }
 
 void Game::Update() {
@@ -59,7 +53,12 @@ void Game::Render() {
 
     // Test sprite sheet
     SpriteSheet* spriteSheet = new SpriteSheet(renderer->GetSDLRenderer(), "ASSETS/Images/1_Pink_Monster/Pink_Monster_Attack1_4.png", 1, 4);
-    renderer->RenderSprite(spriteSheet, 100, 100, 0);
+    renderer->RenderSprite(spriteSheet, 100, 100, frameCount / 16);
+    frameCount++;
+
+    if (frameCount / 16 >= spriteSheet->GetClips().size()) {
+		frameCount = 0;
+	}
 
     // Render all game entities
     for (auto& entity : entities) {
@@ -90,6 +89,12 @@ void Game::Clean() {
         delete renderer;
         renderer = nullptr;
     }
+
+    if (input) {
+		delete input;
+		input = nullptr;
+	}
+
     SDL_Quit();
 }
 

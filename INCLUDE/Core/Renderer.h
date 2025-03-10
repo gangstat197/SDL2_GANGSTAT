@@ -13,6 +13,7 @@ public:
     SDL_Renderer* GetSDLRenderer() const;
     void Clear();
     void Present();
+
     SDL_Texture* LoadTexture(const char* path);
     void RenderTexture(SDL_Texture* texture, int x, int y);
     void RenderSprite(SpriteSheet* spriteSheet, int x, int y, int clipIndex);

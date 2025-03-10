@@ -1,77 +1,88 @@
 #include <Utils/Input.h>
 #include <Utils/Vector2D.h>
 
-Input::Input()
-{
-    // Initialize member variables
-    for (int i = 0; i < SDL_NUM_SCANCODES; i++)
-    {
-        m_keys[i] = false;
-        m_prevKeys[i] = false;
-    }
-    m_mouseButtons = 0;
-    m_prevMouseButtons = 0;
-    m_mouseX = 0;
-    m_mouseY = 0;
-}
+Input::Input() : m_currentMouseButtons(0), m_previousMouseButtons(0), m_mouseX(0), m_mouseY(0) {}
 
-Input::~Input() {
-}
+Input::~Input() {}
 
-void Input::handleEvents()
-{
-    // Handle SDL events
-    while (SDL_PollEvent(&m_event))
-    {
-        switch (m_event.type)
-        {
-            case SDL_KEYDOWN:
-                m_keys[m_event.key.keysym.scancode] = true;
-                break;
-            case SDL_KEYUP:
-                m_keys[m_event.key.keysym.scancode] = false;
-                break;
-            case SDL_MOUSEBUTTONDOWN:
-                m_mouseButtons |= SDL_BUTTON(m_event.button.button);
-                break;
-            case SDL_MOUSEBUTTONUP:
-                m_mouseButtons &= ~SDL_BUTTON(m_event.button.button);
-                break;
-            case SDL_MOUSEMOTION:
-                m_mouseX = m_event.motion.x;
-                m_mouseY = m_event.motion.y;
-                break;
-            default:
-                break;
+void Input::HandleEvents() {
+    m_previousKeys = m_currentKeys;
+    m_previousMouseButtons = m_currentMouseButtons;
+
+    while (SDL_PollEvent(&m_event)) {
+        switch (m_event.type) {
+        case SDL_KEYDOWN:
+            UpdateKeyState(m_event.key.keysym.scancode, true);
+            break;
+        case SDL_KEYUP:
+            UpdateKeyState(m_event.key.keysym.scancode, false);
+            break;
+        case SDL_MOUSEBUTTONDOWN:
+            UpdateMouseButtonState(m_event.button.button, true);
+            break;
+        case SDL_MOUSEBUTTONUP:
+            UpdateMouseButtonState(m_event.button.button, false);
+            break;
+        case SDL_MOUSEMOTION:
+            m_mouseX = m_event.motion.x;
+            m_mouseY = m_event.motion.y;
+            break;
+        default:
+            break;
         }
     }
 }
 
-bool Input::isKeyPressed(SDL_Keycode key)
-{
-    Uint8 scancode = SDL_GetScancodeFromKey(key);
-    return m_keys[scancode];
+void Input::UpdateKeyState(SDL_Scancode scancode, bool isPressed) {
+    m_currentKeys[scancode] = isPressed;
 }
 
-bool Input::isKeyReleased(SDL_Keycode key)
-{
-    Uint8 scancode = SDL_GetScancodeFromKey(key);
-    return !m_keys[scancode];
+void Input::UpdateMouseButtonState(Uint8 button, bool isPressed) {
+    if (isPressed) {
+        m_currentMouseButtons |= SDL_BUTTON(button);
+    }
+    else {
+        m_currentMouseButtons &= ~SDL_BUTTON(button);
+    }
 }
 
-bool Input::isMouseButtonPressed(Uint8 button)
-{
-    return (m_mouseButtons & SDL_BUTTON(button)) != 0;
+bool Input::IsKeyPressed(SDL_Keycode key) {
+    SDL_Scancode scancode = SDL_GetScancodeFromKey(key);
+    return m_currentKeys[scancode];
 }
 
-bool Input::isMouseButtonReleased(Uint8 button)
-{
-    return (m_mouseButtons & SDL_BUTTON(button)) == 0;
+bool Input::IsKeyReleased(SDL_Keycode key) {
+    SDL_Scancode scancode = SDL_GetScancodeFromKey(key);
+    return !m_currentKeys[scancode];
+}
+
+bool Input::IsKeyJustPressed(SDL_Keycode key) {
+    SDL_Scancode scancode = SDL_GetScancodeFromKey(key);
+    return m_currentKeys[scancode] && !m_previousKeys[scancode];
+}
+
+bool Input::IsKeyJustReleased(SDL_Keycode key) {
+    SDL_Scancode scancode = SDL_GetScancodeFromKey(key);
+    return !m_currentKeys[scancode] && m_previousKeys[scancode];
+}
+
+bool Input::IsMouseButtonPressed(Uint8 button) {
+    return (m_currentMouseButtons & SDL_BUTTON(button)) != 0;
+}
+
+bool Input::IsMouseButtonReleased(Uint8 button) {
+    return (m_currentMouseButtons & SDL_BUTTON(button)) == 0;
+}
+
+bool Input::IsMouseButtonJustPressed(Uint8 button) {
+    return (m_currentMouseButtons & SDL_BUTTON(button)) != 0 && (m_previousMouseButtons & SDL_BUTTON(button)) == 0;
+}
+
+bool Input::IsMouseButtonJustReleased(Uint8 button) {
+    return (m_currentMouseButtons & SDL_BUTTON(button)) == 0 && (m_previousMouseButtons & SDL_BUTTON(button)) != 0;
 }
 
 void Input::GetMouseState(Vector2D& mousePosition) {
-    int x, y; 
-    SDL_GetMouseState(&x, &y);
-    mousePosition = Vector2D(x, y);
-    mousePosition.print();
+    SDL_GetMouseState(&m_mouseX, &m_mouseY);
+    mousePosition = Vector2D(m_mouseX, m_mouseY);
 }

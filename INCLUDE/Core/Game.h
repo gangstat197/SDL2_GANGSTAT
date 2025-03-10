@@ -24,7 +24,7 @@ private:
     Input* input;
     SDL_Texture* backgroundTexture;
     bool isRunning;
-
+    int frameCount;
     std::vector<BaseUnit*> entities;
 };
 
