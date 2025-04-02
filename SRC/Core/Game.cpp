@@ -2,12 +2,19 @@
 #include <core/Renderer.h>
 
 #include <systems/InputSystem.h>
+#include <systems/Cursor.h>
 #include <utils/Vector2D.h>
 #include <utils/SpriteSheet.h>
 
 #include <iostream>
 
-Game::Game() : input(nullptr), renderer(nullptr), isRunning(false) {}
+Game::Game() : 
+    input(nullptr), 
+    renderer(nullptr), 
+    isRunning(false), 
+    assetManager(nullptr), 
+    backgroundManager(nullptr),
+    cursor(nullptr) {}
 
 Game::~Game() {
     Clean();
@@ -20,27 +27,41 @@ bool Game::Init(const char* title, int width, int height) {
         return false;
     }
 
+    // Disable the default system cursor
+    SDL_ShowCursor(SDL_DISABLE);
+
     // Create graphic 
     renderer = new Renderer(title, width, height);
 
     // Create input manager
     input = new InputSystem();
 
-    // --------------Load Game Assets
-    // Load background texture
-    backgroundTexture = renderer->LoadTexture("assets/images/LightBlue_Background.png");
-    backgroundTexture = renderer->ScaleTexture(*backgroundTexture, 900, 800); 
-    if (backgroundTexture == nullptr) {
-        std::cout << "Failed to load background texture\n";
-        return false;
-    }
+    // Use singleton instance of AssetManager
+    assetManager = &AssetManager::Instance();
+    LoadAssets();
+    
+    backgroundManager = new BackgroundManager(renderer->GetSDLRenderer(), assetManager->GetTexture("background"), width, height);
+    backgroundManager->SetScrollSpeed(100); // Set scroll speed for the background
+    
+    cursor = new Cursor(renderer->GetSDLRenderer(), assetManager, input, "mouse_cursor");
 
     // Set frame count to 0
     frameCount = 0;
-
+    
     // Set running state 
     isRunning = true;
     return true;
+}
+
+void Game::LoadAssets() {
+    SDL_Texture* backgroundTexture = assetManager->LoadTexture("background", "assets/images/WhiteGrid_Background.png", renderer->GetSDLRenderer());
+    backgroundTexture = assetManager->ScaleTexture(*backgroundTexture, renderer->GetSDLRenderer(), 600, 800); 
+
+    if (backgroundTexture == nullptr) {
+        std::cout << "Failed to load background texture\n";
+        return;
+    }
+
 }
 
 void Game::HandleEvents() {
@@ -58,17 +79,10 @@ void Game::Render() {
     // Clear the renderer
     renderer->Clear();
 
-    // Render the background texture
-    renderer->RenderTexture(backgroundTexture, 0, 0);
+    backgroundManager->RenderBackground(); // Render the background
+    backgroundManager->InfiniteBackground(); // Infinite scrolling background
 
-    // Test sprite sheet
-    // SpriteSheet* spriteSheet = new SpriteSheet(renderer->GetSDLRenderer(), "ASSETS/Images/1_Pink_Monster/Pink_Monster_Attack1_4.png", 1, 4);
-    // renderer->RenderSprite(spriteSheet, 100, 100, frameCount / 16);
-    // frameCount++;
-
-    // if (frameCount / 16 >= spriteSheet->GetClips().size()) {
-    // 	frameCount = 0;
-    // }
+    cursor->Render();
 
     // Present the renderer
     renderer->Present();
@@ -80,10 +94,7 @@ void Game::Render() {
 }
 
 void Game::Clean() {
-    if (backgroundTexture) {
-        renderer->DestroyTexture(backgroundTexture);
-        backgroundTexture = nullptr;
-    }
+    assetManager->UnloadAll(); // Unload all textures
 
     if (renderer) {
         delete renderer;
@@ -95,11 +106,15 @@ void Game::Clean() {
         input = nullptr;
     }
 
+    delete cursor;
+    cursor = nullptr;
+
     SDL_Quit();
 }
 
 void Game::Update() {
     // std::cout << "Updating game state\n";
+    cursor->Update();
 }
 
 bool Game::IsRunning() {

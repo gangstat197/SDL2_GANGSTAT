@@ -1,5 +1,7 @@
-//// filepath: d:\3. Project\3. Games\2. ADVANCED PROGRAMMING\SDL2_GANGSTAT\src\managers\AssetManager.cpp
-#include "managers/AssetManager.h"
+#include <managers/AssetManager.h>
+
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL.h>
 #include <iostream>
 
 AssetManager& AssetManager::Instance() {
@@ -19,7 +21,7 @@ SDL_Texture* AssetManager::LoadTexture(const std::string& assetId, const std::st
     }
 
     // Load new texture
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, SDL_LoadBMP(filePath.c_str()));
+    SDL_Texture* texture = IMG_LoadTexture(renderer, filePath.c_str());
     if (!texture) {
         std::cerr << "AssetManager::LoadTexture - Failed to load: " << filePath << " - " << SDL_GetError() << std::endl;
         return nullptr;
@@ -36,6 +38,36 @@ SDL_Texture* AssetManager::GetTexture(const std::string& assetId) const {
         return it->second;
     }
     return nullptr;
+}
+
+SDL_Texture* AssetManager::ScaleTexture(SDL_Texture& texture, SDL_Renderer* renderer, int width, int height) {
+    SDL_Texture* scaledTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
+    if (!scaledTexture) {
+        SDL_Log("Failed to create scaled texture: %s", SDL_GetError());
+        return nullptr;
+    }
+
+    SDL_SetTextureBlendMode(scaledTexture, SDL_BLENDMODE_BLEND);
+    SDL_Texture* oldTarget = SDL_GetRenderTarget(renderer);
+
+    if (SDL_SetRenderTarget(renderer, scaledTexture) != 0) {
+        SDL_Log("Failed to set render target: %s", SDL_GetError());
+        SDL_DestroyTexture(scaledTexture);
+        return nullptr;
+    }
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+    SDL_RenderClear(renderer);
+
+    if (SDL_RenderCopy(renderer, &texture, nullptr, nullptr) != 0) {
+        SDL_Log("Failed to copy texture: %s", SDL_GetError());
+        SDL_SetRenderTarget(renderer, oldTarget);
+        SDL_DestroyTexture(scaledTexture);
+        return nullptr;
+    }
+
+    SDL_SetRenderTarget(renderer, oldTarget);
+    return scaledTexture;
 }
 
 void AssetManager::UnloadTexture(const std::string& assetId) {

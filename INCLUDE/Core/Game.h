@@ -5,6 +5,9 @@
 #include <vector>
 #include "../core/Renderer.h"
 #include <systems/InputSystem.h>
+#include <managers/AssetManager.h>
+#include <managers/BackgroundManager.h>
+#include <systems/Cursor.h>
 
 class Game {
 public:
@@ -12,6 +15,9 @@ public:
     ~Game();
 
     bool Init(const char* title, int width, int height);
+
+    void LoadAssets();
+
     void HandleEvents();
     void Update();
     void Render();
@@ -19,9 +25,16 @@ public:
     bool IsRunning();
 
 private:
+    // System
     Renderer* renderer; 
     InputSystem* input;
-    SDL_Texture* backgroundTexture;
+
+    // Manager
+    AssetManager* assetManager;
+    BackgroundManager* backgroundManager;
+
+    Cursor* cursor;
+
     bool isRunning;
     int frameCount;
 };

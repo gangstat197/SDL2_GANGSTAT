@@ -13,8 +13,12 @@ public:
     // Returns the SDL_Texture pointer from the cache
     SDL_Texture* LoadTexture(const std::string& assetId, const std::string& filePath, SDL_Renderer* renderer);
 
+    
     // Retrieves a texture from the cache by ID
     SDL_Texture* GetTexture(const std::string& assetId) const;
+    
+    // Scales a texture to the specified width and height
+    SDL_Texture* ScaleTexture(SDL_Texture& texture, SDL_Renderer* renderer, int width, int height);
 
     // Destroys a loaded texture, removes it from the cache
     void UnloadTexture(const std::string& assetId);
