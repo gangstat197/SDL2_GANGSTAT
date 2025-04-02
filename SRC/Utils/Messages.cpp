@@ -1,4 +1,5 @@
-#include <Utils/Messages.h>
+#include <utils/Messages.h>
+#include <SDL2/SDL.h>
 
 void LogErrorAndExit(const char* msg, const char* error)
 {

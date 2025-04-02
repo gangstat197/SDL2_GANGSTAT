@@ -1,9 +1,9 @@
-﻿#include <Core/Game.h>
-#include <Core/Renderer.h>
-#include <Entities/Monster.h>
-#include <Utils/Input.h>
-#include <Utils/Vector2D.h>
-#include <Utils/SpriteSheet.h>
+#include <core/Game.h>
+#include <core/Renderer.h>
+
+#include <systems/InputSystem.h>
+#include <utils/Vector2D.h>
+#include <utils/SpriteSheet.h>
 
 #include <iostream>
 
@@ -24,7 +24,16 @@ bool Game::Init(const char* title, int width, int height) {
     renderer = new Renderer(title, width, height);
 
     // Create input manager
-    input = new Input();
+    input = new InputSystem();
+
+    // --------------Load Game Assets
+    // Load background texture
+    backgroundTexture = renderer->LoadTexture("assets/images/LightBlue_Background.png");
+    backgroundTexture = renderer->ScaleTexture(*backgroundTexture, 900, 800); 
+    if (backgroundTexture == nullptr) {
+        std::cout << "Failed to load background texture\n";
+        return false;
+    }
 
     // Set frame count to 0
     frameCount = 0;
@@ -36,54 +45,45 @@ bool Game::Init(const char* title, int width, int height) {
 
 void Game::HandleEvents() {
     input->HandleEvents();
-}
-
-void Game::Update() {
-    // Update game logic 
+    
+    if (input->IsQuitRequested()) {
+        std::cout << "Quit Game!";
+        isRunning = false;
+        return;
+    }
 }
 
 void Game::Render() {
-    //std::cerr << "Rendering\n";
+    // std::cout << "Rendering\n";
     // Clear the renderer
     renderer->Clear();
 
-    // Create Background
-    backgroundTexture = renderer->LoadTexture("ASSETS/Images/Background_BottomBikini.jpg");
+    // Render the background texture
     renderer->RenderTexture(backgroundTexture, 0, 0);
 
     // Test sprite sheet
-    SpriteSheet* spriteSheet = new SpriteSheet(renderer->GetSDLRenderer(), "ASSETS/Images/1_Pink_Monster/Pink_Monster_Attack1_4.png", 1, 4);
-    renderer->RenderSprite(spriteSheet, 100, 100, frameCount / 16);
-    frameCount++;
+    // SpriteSheet* spriteSheet = new SpriteSheet(renderer->GetSDLRenderer(), "ASSETS/Images/1_Pink_Monster/Pink_Monster_Attack1_4.png", 1, 4);
+    // renderer->RenderSprite(spriteSheet, 100, 100, frameCount / 16);
+    // frameCount++;
 
-    if (frameCount / 16 >= spriteSheet->GetClips().size()) {
-		frameCount = 0;
-	}
+    // if (frameCount / 16 >= spriteSheet->GetClips().size()) {
+    // 	frameCount = 0;
+    // }
 
-    // Render all game entities
-    for (auto& entity : entities) {
-        entity->Render(renderer);
-    }
-    
     // Present the renderer
     renderer->Present();
 
-    // Destroy the sprite sheet texture
-    spriteSheet->DestroyTexture();
-    delete spriteSheet;
-    spriteSheet = nullptr;
-
-    renderer->DestroyTexture(backgroundTexture);
-    backgroundTexture = nullptr;
+    // // Destroy the sprite sheet texture
+    // spriteSheet->DestroyTexture();
+    // delete spriteSheet;
+    // spriteSheet = nullptr;
 }
 
 void Game::Clean() {
-    // Clean up resources
-    for (auto& entity : entities) {
-		entity->Clean();
-		delete entity;
-	}
-    entities.clear();
+    if (backgroundTexture) {
+        renderer->DestroyTexture(backgroundTexture);
+        backgroundTexture = nullptr;
+    }
 
     if (renderer) {
         delete renderer;
@@ -91,13 +91,17 @@ void Game::Clean() {
     }
 
     if (input) {
-		delete input;
-		input = nullptr;
-	}
+        delete input;
+        input = nullptr;
+    }
 
     SDL_Quit();
 }
 
-bool Game::IsRunning() const {
+void Game::Update() {
+    // std::cout << "Updating game state\n";
+}
+
+bool Game::IsRunning() {
     return isRunning;
 }

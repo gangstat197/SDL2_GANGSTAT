@@ -1,9 +1,9 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <string>
-#include <Utils/SpriteSheet.h>
+#include <utils/SpriteSheet.h>
 
 class Renderer {
 public:
@@ -15,6 +15,11 @@ public:
     void Present();
 
     SDL_Texture* LoadTexture(const char* path);
+
+    SDL_Texture* ScaleTexture(SDL_Texture& texture, int width, int height);
+    // SDL_Texture* LoadTextureFromSurface(SDL_Surface* surface);
+
+
     void RenderTexture(SDL_Texture* texture, int x, int y);
     void RenderSprite(SpriteSheet* spriteSheet, int x, int y, int clipIndex);
     void DestroyTexture(SDL_Texture* texture);

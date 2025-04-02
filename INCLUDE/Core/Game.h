@@ -1,11 +1,10 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <vector>
-#include <Entities/BaseUnit.h>
-#include <Core/Renderer.h>
-#include <Utils/Input.h>
+#include "../core/Renderer.h"
+#include <systems/InputSystem.h>
 
 class Game {
 public:
@@ -17,15 +16,14 @@ public:
     void Update();
     void Render();
     void Clean();
-    bool IsRunning() const;
+    bool IsRunning();
 
 private:
     Renderer* renderer; 
-    Input* input;
+    InputSystem* input;
     SDL_Texture* backgroundTexture;
     bool isRunning;
     int frameCount;
-    std::vector<BaseUnit*> entities;
 };
 
 #endif // GAME_H

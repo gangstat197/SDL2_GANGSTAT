@@ -1,67 +1,60 @@
-#include <Utils/SpriteSheet.h>
-#include <SDL_image.h>
+#include <utils/SpriteSheet.h>
+#include <SDL2/SDL_image.h>
 
-SpriteSheet::SpriteSheet(SDL_Renderer* renderer) : mTexture(nullptr), mRenderer(renderer), mWidth(0), mHeight(0) {}
+SpriteSheet::SpriteSheet(SDL_Renderer* renderer)
+    : mTexture(nullptr), mRenderer(renderer), mWidth(0), mHeight(0) {
+}
 
 SpriteSheet::SpriteSheet(SDL_Renderer* renderer, const std::string& path, int rows, int cols)
     : mTexture(nullptr), mRenderer(renderer), mWidth(0), mHeight(0) {
-    if (LoadFromFile(path)) {
-        SplitSheet(rows, cols);
-    }
+    LoadFromFile(path);
+    SplitSheet(rows, cols);
 }
 
 SpriteSheet::~SpriteSheet() {
-    Free();
+    DestroyTexture();
 }
 
 bool SpriteSheet::LoadFromFile(const std::string& path) {
-    Free();
-
-    SDL_Surface* loadedSurface = IMG_Load(path.c_str());
-    if (loadedSurface == nullptr) {
-        SDL_Log("Unable to load image %s! SDL_image Error: %s", path.c_str(), IMG_GetError());
+    SDL_Surface* surface = IMG_Load(path.c_str());
+    if (!surface) {
         return false;
     }
-
-    SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
-
-    mTexture = SDL_CreateTextureFromSurface(mRenderer, loadedSurface);
-    if (mTexture == nullptr) {
-        SDL_Log("Unable to create texture from %s! SDL Error: %s", path.c_str(), SDL_GetError());
-        SDL_FreeSurface(loadedSurface);
-        return false;
-    }
-
-    mWidth = loadedSurface->w;
-    mHeight = loadedSurface->h;
-
-    SDL_FreeSurface(loadedSurface);
-    return true;
+    mTexture = SDL_CreateTextureFromSurface(mRenderer, surface);
+    mWidth = surface->w;
+    mHeight = surface->h;
+    SDL_FreeSurface(surface);
+    return (mTexture != nullptr);
 }
 
 void SpriteSheet::Free() {
-    if (mTexture != nullptr) {
-        SDL_DestroyTexture(mTexture);
-        mTexture = nullptr;
-        mWidth = 0;
-        mHeight = 0;
-    }
+    DestroyTexture();
+    mWidth = 0;
+    mHeight = 0;
 }
 
 void SpriteSheet::Render(int x, int y, SDL_Rect* clip) {
-    SDL_Rect renderQuad = { x, y, mWidth, mHeight };
-
-    if (clip != nullptr) {
-        renderQuad.w = clip->w;
-        renderQuad.h = clip->h;
+    SDL_Rect dst = { x, y, 0, 0 };
+    if (clip) {
+        dst.w = clip->w;
+        dst.h = clip->h;
+    } else {
+        dst.w = mWidth;
+        dst.h = mHeight;
     }
-
-    SDL_RenderCopy(mRenderer, mTexture, clip, &renderQuad);
+    SDL_RenderCopy(mRenderer, mTexture, clip, &dst);
 }
 
 void SpriteSheet::AddClip(int x, int y, int w, int h) {
-    SDL_Rect clip = { x, y, w, h };
-    mClips.push_back(clip);
+    SDL_Rect rect{ x, y, w, h };
+    mClips.push_back(rect);
+}
+
+void SpriteSheet::DestroyTexture() {
+    if (mTexture) {
+        SDL_DestroyTexture(mTexture);
+        mTexture = nullptr;
+    }
 }
 
 const std::vector<SDL_Rect>& SpriteSheet::GetClips() const {
@@ -69,19 +62,11 @@ const std::vector<SDL_Rect>& SpriteSheet::GetClips() const {
 }
 
 void SpriteSheet::SplitSheet(int rows, int cols) {
-    int clipWidth = mWidth / cols;
-    int clipHeight = mHeight / rows;
-
-    for (int row = 0; row < rows; ++row) {
-        for (int col = 0; col < cols; ++col) {
-            AddClip(col * clipWidth, row * clipHeight, clipWidth, clipHeight);
+    int clipW = mWidth / cols;
+    int clipH = mHeight / rows;
+    for (int r = 0; r < rows; r++) {
+        for (int c = 0; c < cols; c++) {
+            AddClip(c * clipW, r * clipH, clipW, clipH);
         }
     }
-}
-
-void SpriteSheet::DestroyTexture() {
-	if (mTexture) {
-		SDL_DestroyTexture(mTexture);
-		mTexture = nullptr;
-	}
 }
