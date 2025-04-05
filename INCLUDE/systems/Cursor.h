@@ -20,5 +20,5 @@ private:
     InputSystem* m_inputSystem;
     SDL_Texture* m_texture;
     
-    Vector2D m_position; // Use Vector2D for position
+    Vector2D m_position; 
 };

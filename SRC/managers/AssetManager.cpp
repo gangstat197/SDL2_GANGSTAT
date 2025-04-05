@@ -14,20 +14,17 @@ AssetManager::~AssetManager() {
 }
 
 SDL_Texture* AssetManager::LoadTexture(const std::string& assetId, const std::string& filePath, SDL_Renderer* renderer) {
-    // Check if texture already exists
     auto it = m_textureMap.find(assetId);
     if (it != m_textureMap.end()) {
         return it->second;
     }
 
-    // Load new texture
     SDL_Texture* texture = IMG_LoadTexture(renderer, filePath.c_str());
     if (!texture) {
         std::cerr << "AssetManager::LoadTexture - Failed to load: " << filePath << " - " << SDL_GetError() << std::endl;
         return nullptr;
     }
 
-    // Cache texture
     m_textureMap[assetId] = texture;
     return texture;
 }
@@ -40,7 +37,7 @@ SDL_Texture* AssetManager::GetTexture(const std::string& assetId) const {
     return nullptr;
 }
 
-SDL_Texture* AssetManager::ScaleTexture(SDL_Texture& texture, SDL_Renderer* renderer, int width, int height) {
+SDL_Texture* AssetManager::ScaleTexture(const std::string& assetId, SDL_Texture& texture, SDL_Renderer* renderer, int width, int height) {
     SDL_Texture* scaledTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
     if (!scaledTexture) {
         SDL_Log("Failed to create scaled texture: %s", SDL_GetError());
@@ -67,7 +64,15 @@ SDL_Texture* AssetManager::ScaleTexture(SDL_Texture& texture, SDL_Renderer* rend
     }
 
     SDL_SetRenderTarget(renderer, oldTarget);
+
+    m_textureMap[assetId] = scaledTexture; // Cache the scaled texture
     return scaledTexture;
+}
+
+SDL_Texture* AssetManager::ScaleTexture(const std::string& assetId, SDL_Texture& texture, SDL_Renderer* renderer, double ratio) {
+    int width, height;
+    SDL_QueryTexture(&texture, nullptr, nullptr, &width, &height);
+    return ScaleTexture(assetId, texture, renderer, static_cast<int>(width * ratio), static_cast<int>(height * ratio));
 }
 
 void AssetManager::UnloadTexture(const std::string& assetId) {
@@ -83,4 +88,14 @@ void AssetManager::UnloadAll() {
         SDL_DestroyTexture(pair.second);
     }
     m_textureMap.clear();
+}
+
+void AssetManager::AddTexture(const std::string& assetId, SDL_Texture* texture) {
+    auto it = m_textureMap.find(assetId);
+    if (it != m_textureMap.end()) {
+        SDL_DestroyTexture(it->second);
+        m_textureMap.erase(it);
+    }
+    
+    m_textureMap[assetId] = texture;
 }

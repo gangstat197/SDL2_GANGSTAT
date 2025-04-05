@@ -1,12 +1,20 @@
 #include <systems/InputSystem.h>
 
-InputSystem::InputSystem() : m_currentMouseButtons(0), m_previousMouseButtons(0), m_mouseX(0), m_mouseY(0) {}
+InputSystem::InputSystem() 
+    : m_currentMouseButtons(0), 
+      m_previousMouseButtons(0), 
+      m_mouseX(0), 
+      m_mouseY(0),
+      m_quitRequested(false) {}
 
 InputSystem::~InputSystem() {}
 
 void InputSystem::HandleEvents() {
     m_previousKeys = m_currentKeys;
     m_previousMouseButtons = m_currentMouseButtons;
+    
+    // Update mouse position every frame regardless of events
+    SDL_GetMouseState(&m_mouseX, &m_mouseY);
 
     while (SDL_PollEvent(&m_event)) {
         switch (m_event.type) {
@@ -85,7 +93,7 @@ bool InputSystem::IsMouseButtonJustReleased(Uint8 button) {
 }
 
 void InputSystem::GetMouseState(Vector2D& mousePosition) {
-    SDL_GetMouseState(&m_mouseX, &m_mouseY);
+    // Simply use the already updated mouse position
     mousePosition = Vector2D(m_mouseX, m_mouseY);
 }
 

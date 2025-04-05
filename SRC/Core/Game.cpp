@@ -2,7 +2,6 @@
 #include <core/Renderer.h>
 
 #include <systems/InputSystem.h>
-#include <systems/Cursor.h>
 #include <utils/Vector2D.h>
 #include <utils/SpriteSheet.h>
 
@@ -12,9 +11,8 @@ Game::Game() :
     input(nullptr), 
     renderer(nullptr), 
     isRunning(false), 
-    assetManager(nullptr), 
-    backgroundManager(nullptr),
-    cursor(nullptr) {}
+    assetManager(nullptr),
+    stateManager(nullptr) {}
 
 Game::~Game() {
     Clean();
@@ -27,74 +25,101 @@ bool Game::Init(const char* title, int width, int height) {
         return false;
     }
 
-    // Disable the default system cursor
+
     SDL_ShowCursor(SDL_DISABLE);
-
-    // Create graphic 
+    
+    // Core components
     renderer = new Renderer(title, width, height);
-
-    // Create input manager
     input = new InputSystem();
-
-    // Use singleton instance of AssetManager
     assetManager = &AssetManager::Instance();
     LoadAssets();
-    
-    backgroundManager = new BackgroundManager(renderer->GetSDLRenderer(), assetManager->GetTexture("background"), width, height);
-    backgroundManager->SetScrollSpeed(100); // Set scroll speed for the background
-    
-    cursor = new Cursor(renderer->GetSDLRenderer(), assetManager, input, "mouse_cursor");
 
-    // Set frame count to 0
+    // State manager
+    
+    stateManager = new GameStateManager();
+    InitStates();
+    
+    stateManager->SwitchState(GameStates::MENU);
+
     frameCount = 0;
     
-    // Set running state 
     isRunning = true;
     return true;
 }
 
 void Game::LoadAssets() {
+    // Load Background texture
     SDL_Texture* backgroundTexture = assetManager->LoadTexture("background", "assets/images/WhiteGrid_Background.png", renderer->GetSDLRenderer());
-    backgroundTexture = assetManager->ScaleTexture(*backgroundTexture, renderer->GetSDLRenderer(), 600, 800); 
 
     if (backgroundTexture == nullptr) {
         std::cout << "Failed to load background texture\n";
         return;
     }
 
+    // Load Heading texture
+    SDL_Texture* headingTexture = assetManager->LoadTexture("heading", "assets/images/MicroDash_Hero.png", renderer->GetSDLRenderer());
+
+    if (headingTexture == nullptr) {
+        std::cout << "Failed to load heading texture\n";
+        return;
+    }
+
+    headingTexture = assetManager->ScaleTexture("heading", *headingTexture, renderer->GetSDLRenderer(), 0.25);
+    
+    // Load cursor texture
+    SDL_Texture* cursorTexture = assetManager->LoadTexture("mouse_cursor", "assets/images/cursor_yellow.png", renderer->GetSDLRenderer());
+    
+    // Load UI textures
+    SDL_Texture* playButtonTexture = assetManager->LoadTexture("button_play", "assets/images/ui/button_play.png", renderer->GetSDLRenderer());
+    playButtonTexture = assetManager->ScaleTexture("button_play", *playButtonTexture, renderer->GetSDLRenderer(), 0.25);
+
+
 }
 
+void Game::InitStates() {
+    // Initialize states 
+    menuState = std::make_shared<MenuState>(renderer, assetManager, input);
+    playingState = std::make_shared<PlayingState>(renderer, assetManager, input);
+    quitState = std::make_shared<QuitState>(renderer, assetManager, input, isRunning);
+    
+    // Register states 
+    stateManager->RegisterState(GameStates::MENU, menuState);
+    stateManager->RegisterState(GameStates::PLAYING, playingState);
+    stateManager->RegisterState(GameStates::QUIT, quitState);
+}
+    
 void Game::HandleEvents() {
+    // Process input events
     input->HandleEvents();
     
+    // Let the current state handle events
+    stateManager->HandleEvents();
+    
+    // Check if a quit was requested
     if (input->IsQuitRequested()) {
-        std::cout << "Quit Game!";
-        isRunning = false;
-        return;
+        stateManager->SwitchState(GameStates::QUIT);
     }
 }
 
 void Game::Render() {
-    // std::cout << "Rendering\n";
-    // Clear the renderer
     renderer->Clear();
-
-    backgroundManager->RenderBackground(); // Render the background
-    backgroundManager->InfiniteBackground(); // Infinite scrolling background
-
-    cursor->Render();
-
-    // Present the renderer
+    
+    stateManager->Render();
+    
     renderer->Present();
+}
 
-    // // Destroy the sprite sheet texture
-    // spriteSheet->DestroyTexture();
-    // delete spriteSheet;
-    // spriteSheet = nullptr;
+void Game::Update() {
+    stateManager->Update();
 }
 
 void Game::Clean() {
-    assetManager->UnloadAll(); // Unload all textures
+    assetManager->UnloadAll(); 
+
+    if (stateManager) {
+        delete stateManager;
+        stateManager = nullptr;
+    }
 
     if (renderer) {
         delete renderer;
@@ -105,17 +130,10 @@ void Game::Clean() {
         delete input;
         input = nullptr;
     }
-
-    delete cursor;
-    cursor = nullptr;
-
+    
     SDL_Quit();
 }
 
-void Game::Update() {
-    // std::cout << "Updating game state\n";
-    cursor->Update();
-}
 
 bool Game::IsRunning() {
     return isRunning;

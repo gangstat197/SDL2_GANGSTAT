@@ -24,6 +24,14 @@ void Renderer::CreateWindow(const char* title, int width, int height) {
     if (window == nullptr) {
         SDL_Log("Failed to create window: %s", SDL_GetError());
     }
+
+    SDL_Surface* iconSurface = IMG_Load("assets/images/logo_MicroDash.png");
+    if (iconSurface == nullptr) {
+        SDL_Log("Failed to load icon surface: %s", SDL_GetError());
+    } else {
+        SDL_SetWindowIcon(window, iconSurface);
+        SDL_FreeSurface(iconSurface);
+    }
 }
 
 void Renderer::Clear() {

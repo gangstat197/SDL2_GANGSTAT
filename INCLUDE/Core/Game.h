@@ -6,8 +6,10 @@
 #include "../core/Renderer.h"
 #include <systems/InputSystem.h>
 #include <managers/AssetManager.h>
-#include <managers/BackgroundManager.h>
-#include <systems/Cursor.h>
+#include <managers/GameStateManager.h>
+#include <states/MenuState.h>
+#include <states/PlayingState.h>
+#include <states/QuitState.h>
 
 class Game {
 public:
@@ -17,6 +19,7 @@ public:
     bool Init(const char* title, int width, int height);
 
     void LoadAssets();
+    void InitStates();
 
     void HandleEvents();
     void Update();
@@ -31,9 +34,12 @@ private:
 
     // Manager
     AssetManager* assetManager;
-    BackgroundManager* backgroundManager;
+    GameStateManager* stateManager;
 
-    Cursor* cursor;
+    // States
+    std::shared_ptr<MenuState> menuState;
+    std::shared_ptr<PlayingState> playingState;
+    std::shared_ptr<QuitState> quitState;
 
     bool isRunning;
     int frameCount;
