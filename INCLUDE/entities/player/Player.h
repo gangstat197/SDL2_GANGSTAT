@@ -1,6 +1,6 @@
 #pragma once
 
-#include <entities/Entity.h>
+#include <entities/base/Entity.h>
 #include <systems/InputSystem.h>
 
 class Player : public Entity {

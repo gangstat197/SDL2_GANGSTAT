@@ -1,5 +1,5 @@
-#include <entities/CollisionHandler.h>
-#include <entities/Entity.h>
+#include <entities/base/CollisionHandler.h>
+#include <entities/base/Entity.h>
 #include <cmath>
 
 CollisionHandler::CollisionHandler() {}
@@ -73,8 +73,6 @@ CollisionCircle CollisionHandler::CreateCircleFromEntity(const Entity& entity) {
     CollisionCircle circle;
     circle.center = entity.GetPosition();
     
-    // Use the smaller dimension (width or height) for the radius
-    // Multiply by 0.5 to get a reasonable circle from the dimensions
     int width = entity.GetWidth();
     int height = entity.GetHeight();
     float smallerDimension = std::min(width, height);

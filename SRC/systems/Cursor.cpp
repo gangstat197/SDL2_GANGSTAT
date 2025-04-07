@@ -17,7 +17,7 @@ Cursor::Cursor(SDL_Renderer* renderer, AssetManager* assetManager, InputSystem* 
 }
 
 Cursor::~Cursor() {
-}
+}   
 
 void Cursor::Update() {
     m_inputSystem->GetMouseState(m_position);
@@ -26,6 +26,6 @@ void Cursor::Update() {
 void Cursor::Render() {
     if (!m_texture) return;
     
-    SDL_Rect destRect = { static_cast<int>(m_position.x), static_cast<int>(m_position.y), 128, 128 };
+    SDL_Rect destRect = { static_cast<int>(m_position.x), static_cast<int>(m_position.y - 10), 522 / 20, 771 / 20};
     SDL_RenderCopy(m_renderer, m_texture, nullptr, &destRect);
 }

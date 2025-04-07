@@ -65,7 +65,7 @@ SDL_Texture* AssetManager::ScaleTexture(const std::string& assetId, SDL_Texture&
 
     SDL_SetRenderTarget(renderer, oldTarget);
 
-    m_textureMap[assetId] = scaledTexture; // Cache the scaled texture
+    m_textureMap[assetId] = scaledTexture; 
     return scaledTexture;
 }
 

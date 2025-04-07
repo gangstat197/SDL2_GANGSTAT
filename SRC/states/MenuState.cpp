@@ -1,10 +1,8 @@
 #include <states/MenuState.h>
 #include <iostream>
 #include <SDL2/SDL.h>
-#include <managers/GameStateManager.h> // Include for GameStates enum
+#include <managers/GameStateManager.h> 
 #include <ui/Button.h>
-#include <ui/Panel.h>
-#include <ui/Label.h>
 #include <functional>
 
 MenuState::MenuState(Renderer* renderer, AssetManager* assetManager, InputSystem* input)
@@ -24,7 +22,7 @@ void MenuState::Init() {
     // UI manager
     m_uiManager = std::make_unique<UIManager>(m_renderer, m_assetManager, m_input);
     
-    // Play Button
+    // Create buttons
     auto playButton = std::make_shared<Button>(
         m_renderer, 
         m_assetManager, 
@@ -35,9 +33,48 @@ void MenuState::Init() {
         }
     );
     
-    playButton->SetPosition(250, 400);
+    auto optionsButton = std::make_shared<Button>(
+        m_renderer, 
+        m_assetManager, 
+        m_input, 
+        "button_options", 
+        [this]() {
+            // TODO: Implement options state
+            std::cout << "Options button clicked\n";
+        }
+    );
     
+    auto quitButton = std::make_shared<Button>(
+        m_renderer, 
+        m_assetManager, 
+        m_input, 
+        "button_quit", 
+        [this]() {
+            RequestStateChange(GameStates::QUIT);
+        }
+    );
+    
+    // Position buttons vertically centered with spacing
+    int screenWidth = 800;
+    int screenHeight = 800;
+    int buttonHeight = playButton->GetRect().h;
+    int spacing = 20;
+    
+    // Calculate starting Y position to center the group
+    int totalHeight = buttonHeight * 3 + spacing * 2;
+    int startY = (screenHeight - totalHeight) / 2;
+    int offSetX = 100;
+    int offSetY = 100;
+
+    // Position each button
+    playButton->SetPosition(screenWidth/2 - playButton->GetRect().w/2 - offSetX, startY + offSetY);
+    optionsButton->SetPosition(screenWidth/2 - optionsButton->GetRect().w/2 - offSetX, startY + buttonHeight + spacing + offSetY);
+    quitButton->SetPosition(screenWidth/2 - quitButton->GetRect().w/2 - offSetX, startY + (buttonHeight + spacing) * 2 + offSetY);
+    
+    // Add buttons to UI manager
     m_uiManager->AddComponent(playButton);
+    m_uiManager->AddComponent(optionsButton);
+    m_uiManager->AddComponent(quitButton);
 }
 
 void MenuState::HandleEvents() {

@@ -1,8 +1,8 @@
 #pragma once
 
 #include <states/State.h>
-#include <entities/EnemySpawner.h>
-#include <entities/Enemy.h>
+#include <entities/enemy/EnemySpawner.h>
+#include <entities/enemy/Enemy.h>
 
 class PlayingState : public State {
 public:

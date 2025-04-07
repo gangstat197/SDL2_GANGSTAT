@@ -12,9 +12,13 @@ Button::Button(Renderer* renderer,
       m_clickSoundId(""),
       m_clickCallback(clickCallback),
       m_isPressed(false),
-      m_wasHovered(false) {
-    
-    // Set button size based on texture
+      m_wasHovered(false),
+      m_currentScale(1.0f),
+      m_targetScale(1.0f),
+      m_normalScale(1.0f),
+      m_hoverScale(1.2f), 
+      m_scaleSpeed(10.0f)  
+{
     SDL_Texture* texture = m_assetManager->GetTexture(textureId);
     if (texture) {
         int width, height;
@@ -35,9 +39,12 @@ void Button::Update() {
     bool hoverChanged = m_isHovered != m_wasHovered;
     m_wasHovered = m_isHovered;
     
-    if (hoverChanged && m_isHovered) {
-        // Play hover sound or trigger animation if needed
-    }
+    // Update scale animation
+    m_targetScale = m_isHovered ? m_hoverScale : m_normalScale;
+    
+    // Smoothly interpolate current scale to target scale
+    float deltaTime = 1.0f / 60.0f; // Assuming 60 FPS, adjust if needed
+    m_currentScale += (m_targetScale - m_currentScale) * m_scaleSpeed * deltaTime;
 }
 
 void Button::Render() {
@@ -51,7 +58,23 @@ void Button::Render() {
     
     SDL_Texture* texture = m_assetManager->GetTexture(textureToRender);
     if (texture) {
-        m_renderer->RenderTexture(texture, m_rect.x, m_rect.y);
+        // Calculate scaled dimensions
+        int scaledWidth = static_cast<int>(m_rect.w * m_currentScale);
+        int scaledHeight = static_cast<int>(m_rect.h * m_currentScale);
+        
+        // Calculate offset to keep button centered
+        int offsetX = (m_rect.w - scaledWidth) / 2;
+        int offsetY = (m_rect.h - scaledHeight) / 2;
+        
+        // Create destination rectangle with scaled dimensions
+        SDL_Rect destRect = {
+            m_rect.x + offsetX,
+            m_rect.y + offsetY,
+            scaledWidth,
+            scaledHeight
+        };
+        
+        m_renderer->RenderTexture(texture, destRect);
     }
 }
 
@@ -67,14 +90,7 @@ bool Button::HandleEvent() {
     if (m_isPressed && m_input->IsMouseButtonJustReleased(SDL_BUTTON_LEFT)) {
         m_isPressed = false;
         
-        // Only trigger if still hovering (user didn't drag away)
         if (m_isHovered && m_clickCallback) {
-            // Play click sound if available
-            // if (!m_clickSoundId.empty()) {
-            //     // Play sound effect
-            // }
-            
-            // Execute callback
             m_clickCallback();
             return true;
         }
@@ -101,4 +117,12 @@ void Button::SetHoverTexture(const std::string& textureId) {
 
 void Button::SetClickSound(const std::string& soundId) {
     m_clickSoundId = soundId;
+}
+
+void Button::SetPosition(int x, int y) {
+    GUIComponent::SetPosition(x, y);
+}
+
+void Button::SetSize(int width, int height) {
+    GUIComponent::SetSize(width, height);
 }

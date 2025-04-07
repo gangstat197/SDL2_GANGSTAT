@@ -70,9 +70,17 @@ void Game::LoadAssets() {
     SDL_Texture* cursorTexture = assetManager->LoadTexture("mouse_cursor", "assets/images/cursor_yellow.png", renderer->GetSDLRenderer());
     
     // Load UI textures
-    SDL_Texture* playButtonTexture = assetManager->LoadTexture("button_play", "assets/images/ui/button_play.png", renderer->GetSDLRenderer());
+    SDL_Texture* playButtonTexture = assetManager->LoadTexture("button_play", "assets/images/ui/btn_play.png", renderer->GetSDLRenderer());
     playButtonTexture = assetManager->ScaleTexture("button_play", *playButtonTexture, renderer->GetSDLRenderer(), 0.25);
+    
+    SDL_Texture* optionsButtonTexture = assetManager->LoadTexture("button_options", "assets/images/ui/btn_options.png", renderer->GetSDLRenderer());
+    optionsButtonTexture = assetManager->ScaleTexture("button_options", *optionsButtonTexture, renderer->GetSDLRenderer(), 0.25);
 
+    SDL_Texture* exitButtonTexture = assetManager->LoadTexture("button_quit", "assets/images/ui/btn_quit.png", renderer->GetSDLRenderer());
+    exitButtonTexture = assetManager->ScaleTexture("button_quit", *exitButtonTexture, renderer->GetSDLRenderer(), 0.25);
+
+    SDL_Texture* debug_position = assetManager->LoadTexture("debug_position", "assets/images/debug/debug_reddot.png", renderer->GetSDLRenderer());
+    debug_position = assetManager->ScaleTexture("debug_position", *debug_position, renderer->GetSDLRenderer(), 0.5);
 
 }
 

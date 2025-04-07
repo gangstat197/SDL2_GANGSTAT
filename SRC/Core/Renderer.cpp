@@ -50,6 +50,35 @@ void Renderer::RenderTexture(SDL_Texture* texture, int x, int y) {
     SDL_RenderCopy(m_renderer, texture, nullptr, &dst);
 }
 
+void Renderer::RenderTexture(SDL_Texture* texture, int x, int y, int width, int height, float rotation) {
+    if (texture) {
+        SDL_Rect destRect = {
+            static_cast<int>(x - width / 2),
+            static_cast<int>(y - height / 2),
+            width,
+            height
+        };
+        
+        SDL_Point center = {width / 2, height / 2};
+        
+        SDL_RenderCopyEx(
+            m_renderer,
+            texture,
+            nullptr,
+            &destRect,
+            rotation,
+            &center,
+            SDL_FLIP_NONE
+        );
+    }
+}
+
+void Renderer::RenderTexture(SDL_Texture* texture, const SDL_Rect& destRect) {
+    if (texture) {
+        SDL_RenderCopy(m_renderer, texture, nullptr, &destRect);
+    }
+}
+
 void Renderer::RenderSprite(SpriteSheet* spriteSheet, int x, int y, int clipIndex) {
     const std::vector<SDL_Rect>& clips = spriteSheet->GetClips();
     if (clipIndex < 0 || clipIndex >= clips.size()) {
@@ -61,4 +90,17 @@ void Renderer::RenderSprite(SpriteSheet* spriteSheet, int x, int y, int clipInde
 
 SDL_Renderer* Renderer::GetSDLRenderer() const {
     return m_renderer;
+}
+
+SDL_Window* Renderer::GetWindow() const {
+    return window;
+}
+
+void Renderer::GetWindowSize(int* width, int* height) const {
+    if (window) {
+        SDL_GetWindowSize(window, width, height);
+    } else {
+        *width = 0;
+        *height = 0;
+    }
 }

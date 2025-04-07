@@ -3,7 +3,7 @@
 #include <vector>
 #include <memory>
 #include <string>
-#include <entities/Enemy.h>
+#include <entities/enemy/Enemy.h>
 #include <random>
 
 class EnemySpawner {

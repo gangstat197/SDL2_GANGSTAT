@@ -1,9 +1,21 @@
 # Define paths to the unified SDL directories
 SDL_DIR = ./lib
 
-SOURCES = main.cpp $(wildcard src/*.cpp) $(wildcard src/**/*.cpp)
+# Explicitly list all source directory patterns to ensure we capture everything
+SOURCES = main.cpp \
+	$(wildcard src/*.cpp) \
+	$(wildcard src/core/*.cpp) \
+	$(wildcard src/entities/*.cpp) \
+	$(wildcard src/entities/base/*.cpp) \
+	$(wildcard src/entities/enemy/*.cpp) \
+	$(wildcard src/entities/player/*.cpp) \
+	$(wildcard src/managers/*.cpp) \
+	$(wildcard src/states/*.cpp) \
+	$(wildcard src/systems/*.cpp) \
+	$(wildcard src/ui/*.cpp) \
+	$(wildcard src/utils/*.cpp)
 
-# Default target - just builds SDL2
+# Default target - builds the game with all source files
 all:
 	g++ -I ./include \
 		-I $(SDL_DIR)/SDL2/include \

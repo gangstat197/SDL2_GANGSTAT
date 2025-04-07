@@ -1,8 +1,10 @@
 #pragma once
 
-#include <ui/GUIComponent.h>
-#include <functional>
+#include <SDL2/SDL.h>
 #include <string>
+#include <functional>
+#include <memory>
+#include "GUIComponent.h"
 
 class Button : public GUIComponent {
 public:
@@ -23,6 +25,8 @@ public:
     void SetTexture(const std::string& textureId);
     void SetHoverTexture(const std::string& textureId);
     void SetClickSound(const std::string& soundId);
+    void SetPosition(int x, int y);
+    void SetSize(int width, int height);
     
 private:
     std::string m_textureId;
@@ -32,4 +36,11 @@ private:
     
     bool m_isPressed;
     bool m_wasHovered;
+    
+    // Scale animation variables
+    float m_currentScale;
+    float m_targetScale;
+    float m_normalScale;
+    float m_hoverScale;
+    float m_scaleSpeed;
 };

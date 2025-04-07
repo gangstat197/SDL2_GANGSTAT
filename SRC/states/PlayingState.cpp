@@ -6,23 +6,37 @@ PlayingState::PlayingState(Renderer* renderer, AssetManager* assetManager, Input
 }
 
 PlayingState::~PlayingState() {
-    // Base destructor will handle cleanup of common resources
 }
 
 void PlayingState::Init() {
     std::cout << "PlayingState initialized\n";
     
-    // Initialize common resources using base class helpers
-    InitializeBackground("background", 800, 800, 100);
+    InitializeBackground("background", 800, 800, 30);
     InitializeCursor("mouse_cursor");
 
-    // Initialize test enemy
+    // Intialize player
+
+
+    // Load enemy texture
     SDL_Texture* enemy_texture = m_assetManager->LoadTexture("enemy", "assets/images/test_bacteria.png", m_renderer->GetSDLRenderer());
     enemy_texture = m_assetManager->ScaleTexture("enemy", *enemy_texture, m_renderer->GetSDLRenderer(), 0.25);
+ 
+    // // Create a test enemy
+    m_test_enemy = new Enemy(m_renderer, m_assetManager, "enemy", ColliderType::POLYGON);
 
-    m_test_enemy = new Enemy(m_renderer, m_assetManager, "enemy");
-    m_test_enemy->SetPosition(Vector2D(400, -20));
-    m_test_enemy->SetSpeed(40);
+    int width = m_test_enemy->GetWidth();
+    int height = m_test_enemy->GetHeight();
+
+    std::vector<Vector2D> points = {
+        Vector2D(-width/2, -height/2),
+        Vector2D(width/2, -height/2),
+        Vector2D(width/2, height/2),
+        Vector2D(-width/2, height/2),
+    };
+
+    m_test_enemy->GetColliderComponent()->SetPolygonCollider(4, &points);
+    m_test_enemy->SetPosition(Vector2D(200, 200));
+    m_test_enemy->SetSpeed(10); 
     m_test_enemy->SetRotationSpeed(10);
     m_test_enemy->SetMovementPattern(MovementPattern::STRAIGHT);
 }
@@ -32,24 +46,23 @@ void PlayingState::HandleEvents() {
 }
 
 void PlayingState::Update() {
-    float deltaTime = 0.016f; // Approximately 60 FPS
+    float deltaTime = 0.016f; // FIXED DELTA TIME - 60 FPS
+    // TODO: Implement a proper timer for deltaTime
+    
     m_test_enemy->Update(deltaTime);
+    std::cout << "Collision: " << m_test_enemy->GetColliderComponent()->CheckCollision() << std::endl;
     m_cursor->Update();
 }
 
 void PlayingState::Render() {
-    // Render background
     m_backgroundManager->RenderBackground();
     m_backgroundManager->InfiniteBackground();
     
-    // Render game elements here
     m_test_enemy->Render();
     
-    // Render cursor on top
     m_cursor->Render();
 }
 
 void PlayingState::Cleanup() {
     std::cout << "PlayingState cleaned up\n";
-    // Base class destructor will handle cleanup of common resources
 }

@@ -4,41 +4,44 @@
 #include <core/Renderer.h>
 #include <managers/AssetManager.h>
 #include <utils/Vector2D.h>
+#include <entities/base/Movement.h>
+#include <entities/base/Rotation.h>
+#include <entities/base/Collider.h>
+
+#include <memory>
 
 class Entity {
 public:
-    Entity(Renderer* renderer, AssetManager* assetManager, const std::string& textureId);
+    Entity(Renderer* renderer, AssetManager* assetManager, const std::string& textureId, ColliderType colliderType);
     virtual ~Entity();
     
-    virtual void Update(float deltaTime) = 0;
-    virtual void Render() = 0;
+    virtual void Update(float deltaTime);
+    virtual void Render();
     
-    // Position
     void SetPosition(const Vector2D& position);
     void SetPosition(float x, float y);
     Vector2D GetPosition() const;
-    
-    // Scale
+
     void SetScale(float scale);
     float GetScale() const;
     
-    // Rotation (in degrees)
-    void SetRotation(float degrees);
-    float GetRotation() const;
-    
-    // Size
     void SetSize(int width, int height);
     int GetWidth() const;
     int GetHeight() const;
     
-    // Collider
-    SDL_Rect GetCollider() const;
-    bool CheckCollision(const SDL_Rect& other) const;
+    void SetRotation(float degrees);
+    float GetRotation() const;
     
-    // Status
     void SetActive(bool active);
     bool IsActive() const;
     
+    void RenderDebug();
+
+    Movement* GetMovementComponent() const;
+    Rotation* GetRotationComponent() const;
+    Collider* GetColliderComponent() const;
+    
+    Renderer* GetRenderer() const { return m_renderer; }
 protected:
     Renderer* m_renderer;
     AssetManager* m_assetManager;
@@ -46,11 +49,14 @@ protected:
     std::string m_textureId;
     Vector2D m_position;
     float m_scale;
-    float m_rotation; // In degrees
+    float m_rotation; 
     int m_width;
     int m_height;
     bool m_isActive;
     
-    SDL_Rect m_collider;
     void UpdateCollider();
+    
+    std::unique_ptr<Movement> m_movement;
+    std::unique_ptr<Rotation> m_rotationComponent;
+    std::unique_ptr<Collider> m_collider;
 }; 

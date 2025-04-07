@@ -1,5 +1,5 @@
-#include <entities/EnemySpawner.h>
-#include <entities/Player.h>
+#include <entities/enemy/EnemySpawner.h>
+#include <entities/player/Player.h>
 #include <random>
 #include <ctime>
 #include <algorithm>
@@ -75,7 +75,7 @@ void EnemySpawner::Render() {
 
 std::shared_ptr<Enemy> EnemySpawner::SpawnEnemy(const std::string& textureId, MovementPattern pattern) {
     // Create new enemy
-    auto enemy = std::make_shared<Enemy>(m_renderer, m_assetManager, textureId);
+    auto enemy = std::make_shared<Enemy>(m_renderer, m_assetManager, textureId, ColliderType::CIRCLE);
     
     // Set random spawn position
     Vector2D spawnPos = GetRandomSpawnPosition();
@@ -85,16 +85,15 @@ std::shared_ptr<Enemy> EnemySpawner::SpawnEnemy(const std::string& textureId, Mo
     enemy->SetMovementPattern(pattern);
     
     // Set a custom rotation speed based on the pattern type
-    // Different movement patterns look better with different rotation styles
     switch (pattern) {
         case MovementPattern::STRAIGHT:
             // Slow, consistent rotation for straight-moving enemies
-            enemy->SetRotationSpeed(45.0f); // 45 degrees per second
+            enemy->SetRotationSpeed(45.0f);
             break;
             
         case MovementPattern::ZIGZAG:
             // ZigZag looks good with faster rotation
-            enemy->SetRotationSpeed(90.0f); // 90 degrees per second
+            enemy->SetRotationSpeed(90.0f);
             break;
             
         case MovementPattern::CURVE:
@@ -104,43 +103,17 @@ std::shared_ptr<Enemy> EnemySpawner::SpawnEnemy(const std::string& textureId, Mo
             
         case MovementPattern::SPIRAL:
             // Spiral enemies rotate with the spiral
-            enemy->SetRotationSpeed(120.0f); // Fast rotation
+            enemy->SetRotationSpeed(120.0f);
             break;
             
         case MovementPattern::CUSTOM:
+        case MovementPattern::NONE:
+        default:
             // Random rotation for custom patterns
             std::uniform_real_distribution<float> rotDist(-60.0f, 60.0f);
             enemy->SetRotationSpeed(rotDist(m_rng));
             break;
     }
-    
-    // Set a random collider type to match bacteria appearance
-    std::uniform_int_distribution<int> colliderDist(0, 2); // 3 collider types (0-2)
-    int colliderType = colliderDist(m_rng);
-    
-    switch (colliderType) {
-        case 0:
-            // Keep default rectangle collider
-            break;
-        case 1:
-            // Use circle collider (good for round bacteria)
-            enemy->SetColliderType(ColliderType::CIRCLE);
-            enemy->SetCircleCollider(0.4f); // Slightly smaller than default for better gameplay
-            break;
-        case 2:
-            // Use polygon collider (good for more complex bacteria shapes)
-            {
-                // Create random number of sides (3-8)
-                std::uniform_int_distribution<int> sidesDist(3, 8);
-                int sides = sidesDist(m_rng);
-                enemy->SetColliderType(ColliderType::POLYGON);
-                enemy->SetPolygonCollider(sides, 0.4f);
-            }
-            break;
-    }
-    
-    // Uncomment this line during debugging to visualize colliders
-    // enemy->RenderCollider(true);
     
     // Add to active enemies list
     m_enemies.push_back(enemy);
@@ -149,16 +122,16 @@ std::shared_ptr<Enemy> EnemySpawner::SpawnEnemy(const std::string& textureId, Mo
 }
 
 bool EnemySpawner::CheckCollisions(Player* player) {
-    if (!player || !player->IsActive()) return false;
+    // if (!player || !player->IsActive()) return false;
     
-    for (auto& enemy : m_enemies) {
-        if (enemy && enemy->IsActive() && enemy->CheckCollisionWithPlayer(player)) {
-            player->TakeDamage(enemy->GetDamage());
-            return true;
-        }
-    }
+    // for (auto& enemy : m_enemies) {
+    //     if (enemy && enemy->IsActive() && enemy->CheckCollisionWithPlayer(player)) {
+    //         player->TakeDamage(0);
+    //         return true;
+    //     }
+    // }
     
-    return false;
+    // return false;
 }
 
 void EnemySpawner::Reset() {
