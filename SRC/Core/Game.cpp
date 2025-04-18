@@ -12,7 +12,8 @@ Game::Game() :
     renderer(nullptr), 
     isRunning(false), 
     assetManager(nullptr),
-    stateManager(nullptr) {}
+    stateManager(nullptr),
+    soundManager(nullptr) {}
 
 Game::~Game() {
     Clean();
@@ -32,6 +33,14 @@ bool Game::Init(const char* title, int width, int height) {
     renderer = new Renderer(title, width, height);
     input = new InputSystem();
     assetManager = &AssetManager::Instance();
+    soundManager = &SoundManager::Instance();
+
+    // Initialize sound manager
+    if (!soundManager->Initialize()) {
+        std::cerr << "Failed to initialize sound manager" << std::endl;
+        return false;
+    }
+
     LoadAssets();
 
     // State manager
@@ -82,6 +91,19 @@ void Game::LoadAssets() {
     SDL_Texture* debug_position = assetManager->LoadTexture("debug_position", "assets/images/debug/debug_reddot.png", renderer->GetSDLRenderer());
     debug_position = assetManager->ScaleTexture("debug_position", *debug_position, renderer->GetSDLRenderer(), 0.5);
 
+    // Load player texture
+    SDL_Texture* playerTexture = assetManager->LoadTexture("player", "assets/images/player/mr_square.png", renderer->GetSDLRenderer());
+    playerTexture = assetManager->ScaleTexture("player", *playerTexture, renderer->GetSDLRenderer(), 0.15);
+
+    // Load enemy texture
+    SDL_Texture* enemyTexture = assetManager->LoadTexture("enemy_round", "assets/images/enemy/bacteria_round.png", renderer->GetSDLRenderer());
+    enemyTexture = assetManager->ScaleTexture("enemy_round", *enemyTexture, renderer->GetSDLRenderer(), 0.5);
+
+    // Load music
+    assetManager->LoadMusic("main_theme", "assets/sounds/main_theme.mp3");
+
+    // Play music
+    soundManager->PlayMusic("main_theme", -1);
 }
 
 void Game::InitStates() {
@@ -97,13 +119,10 @@ void Game::InitStates() {
 }
     
 void Game::HandleEvents() {
-    // Process input events
     input->HandleEvents();
-    
-    // Let the current state handle events
+
     stateManager->HandleEvents();
-    
-    // Check if a quit was requested
+
     if (input->IsQuitRequested()) {
         stateManager->SwitchState(GameStates::QUIT);
     }

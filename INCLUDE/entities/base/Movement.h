@@ -11,8 +11,7 @@ enum class MovementPattern {
     STRAIGHT,
     ZIGZAG,
     CURVE,
-    SPIRAL,
-    CUSTOM
+    SPIRAL
 };
 
 class Movement {
@@ -34,9 +33,6 @@ public:
     // Set initial position (reference point for patterns)
     void SetInitialPosition(const Vector2D& position);
     
-    // Set custom movement function
-    void SetCustomMovementFunction(std::function<void(Entity*, float)> moveFunction);
-    
     // Utility function to check if entity is off screen and deactivate it
     void CheckOffScreen(int screenWidth = 800, int screenHeight = 600, int margin = 100);
     
@@ -46,7 +42,6 @@ private:
     MovementPattern m_pattern;
     float m_elapsedTime;
     Vector2D m_initialPosition;
-    std::function<void(Entity*, float)> m_customMoveFunction;
     
     // Movement pattern implementations
     void MoveStraight(float deltaTime);

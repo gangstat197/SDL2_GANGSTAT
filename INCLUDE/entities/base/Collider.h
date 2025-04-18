@@ -25,6 +25,7 @@ public:
     ColliderType GetColliderType() const;
     std::vector<Vector2D> GetPoints() const;
     float GetRadius() const;
+    Vector2D GetPosition() const;
     
     void SetPosition(const Vector2D& position);
     void SetColliderType(ColliderType type);
@@ -34,8 +35,10 @@ public:
     
     void RenderColliderDebug();
     
-    bool CheckCollision();
-    
+    bool CheckCollision(Collider* playerCollider);
+    bool CheckPolygonCollision(Collider* playerCollider);
+    bool CheckCircleCollision(Collider* playerCollider);
+
 private:
     Entity* m_owner;
     ColliderType m_colliderType;

@@ -15,6 +15,7 @@ public:
     double operator*(const Vector2D& other) const;
     double magnitude() const;
     Vector2D normalize() const;
+    Vector2D perpendicular() const;
     void print() const;
 
     double x;

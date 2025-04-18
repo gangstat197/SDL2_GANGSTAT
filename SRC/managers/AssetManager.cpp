@@ -2,6 +2,8 @@
 
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
 #include <iostream>
 
 AssetManager& AssetManager::Instance() {
@@ -88,6 +90,21 @@ void AssetManager::UnloadAll() {
         SDL_DestroyTexture(pair.second);
     }
     m_textureMap.clear();
+    
+    for (auto& pair : m_fontMap) {
+        TTF_CloseFont(pair.second);
+    }
+    m_fontMap.clear();
+    
+    for (auto& pair : m_soundMap) {
+        Mix_FreeChunk(pair.second);
+    }
+    m_soundMap.clear();
+    
+    for (auto& pair : m_musicMap) {
+        Mix_FreeMusic(pair.second);
+    }
+    m_musicMap.clear();
 }
 
 void AssetManager::AddTexture(const std::string& assetId, SDL_Texture* texture) {
@@ -98,4 +115,130 @@ void AssetManager::AddTexture(const std::string& assetId, SDL_Texture* texture) 
     }
     
     m_textureMap[assetId] = texture;
+}
+
+TTF_Font* AssetManager::LoadFont(const std::string& fontId, const std::string& filePath, int fontSize) {
+    auto it = m_fontMap.find(fontId);
+    if (it != m_fontMap.end()) {
+        return it->second;
+    }
+
+    TTF_Font* font = TTF_OpenFont(filePath.c_str(), fontSize);
+    if (!font) {
+        std::cerr << "AssetManager::LoadFont - Failed to load: " << filePath << " - " << TTF_GetError() << std::endl;
+        return nullptr;
+    }
+
+    m_fontMap[fontId] = font;
+    return font;
+}
+
+void AssetManager::AddFont(const std::string& fontId, TTF_Font* font) {
+    auto it = m_fontMap.find(fontId);
+    if (it != m_fontMap.end()) {
+        TTF_CloseFont(it->second);
+        m_fontMap.erase(it);
+    }
+    
+    m_fontMap[fontId] = font;
+}
+
+TTF_Font* AssetManager::GetFont(const std::string& fontId) const {
+    auto it = m_fontMap.find(fontId);
+    if (it != m_fontMap.end()) {
+        return it->second;
+    }
+    return nullptr;
+}
+
+void AssetManager::UnloadFont(const std::string& fontId) {
+    auto it = m_fontMap.find(fontId);
+    if (it != m_fontMap.end()) {
+        TTF_CloseFont(it->second);
+        m_fontMap.erase(it);
+    }
+}
+
+Mix_Chunk* AssetManager::LoadSound(const std::string& soundId, const std::string& filePath) {
+    auto it = m_soundMap.find(soundId);
+    if (it != m_soundMap.end()) {
+        return it->second;
+    }
+
+    Mix_Chunk* sound = Mix_LoadWAV(filePath.c_str());
+    if (!sound) {
+        std::cerr << "AssetManager::LoadSound - Failed to load: " << filePath << " - " << Mix_GetError() << std::endl;
+        return nullptr;
+    }
+
+    m_soundMap[soundId] = sound;
+    return sound;
+}
+
+void AssetManager::AddSound(const std::string& soundId, Mix_Chunk* sound) {
+    auto it = m_soundMap.find(soundId);
+    if (it != m_soundMap.end()) {
+        Mix_FreeChunk(it->second);
+        m_soundMap.erase(it);
+    }
+    
+    m_soundMap[soundId] = sound;
+}
+
+Mix_Chunk* AssetManager::GetSound(const std::string& soundId) const {
+    auto it = m_soundMap.find(soundId);
+    if (it != m_soundMap.end()) {
+        return it->second;
+    }
+    return nullptr;
+}
+
+void AssetManager::UnloadSound(const std::string& soundId) {
+    auto it = m_soundMap.find(soundId);
+    if (it != m_soundMap.end()) {
+        Mix_FreeChunk(it->second);
+        m_soundMap.erase(it);
+    }
+}
+
+Mix_Music* AssetManager::LoadMusic(const std::string& musicId, const std::string& filePath) {
+    auto it = m_musicMap.find(musicId);
+    if (it != m_musicMap.end()) {
+        return it->second;
+    }
+
+    Mix_Music* music = Mix_LoadMUS(filePath.c_str());
+    if (!music) {
+        std::cerr << "AssetManager::LoadMusic - Failed to load: " << filePath << " - " << Mix_GetError() << std::endl;
+        return nullptr;
+    }
+
+    m_musicMap[musicId] = music;
+    return music;
+}
+
+void AssetManager::AddMusic(const std::string& musicId, Mix_Music* music) {
+    auto it = m_musicMap.find(musicId);
+    if (it != m_musicMap.end()) {
+        Mix_FreeMusic(it->second);
+        m_musicMap.erase(it);
+    }
+    
+    m_musicMap[musicId] = music;
+}
+
+Mix_Music* AssetManager::GetMusic(const std::string& musicId) const {
+    auto it = m_musicMap.find(musicId);
+    if (it != m_musicMap.end()) {
+        return it->second;
+    }
+    return nullptr;
+}
+
+void AssetManager::UnloadMusic(const std::string& musicId) {
+    auto it = m_musicMap.find(musicId);
+    if (it != m_musicMap.end()) {
+        Mix_FreeMusic(it->second);
+        m_musicMap.erase(it);
+    }
 }

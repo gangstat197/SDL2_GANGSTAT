@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
 #include <string>
 #include <unordered_map>
 
@@ -19,6 +21,21 @@ public:
 
     void UnloadTexture(const std::string& assetId);
 
+    TTF_Font* LoadFont(const std::string& fontId, const std::string& filePath, int fontSize);
+    void AddFont(const std::string& fontId, TTF_Font* font);
+    TTF_Font* GetFont(const std::string& fontId) const;
+    void UnloadFont(const std::string& fontId);
+
+    Mix_Chunk* LoadSound(const std::string& soundId, const std::string& filePath);
+    void AddSound(const std::string& soundId, Mix_Chunk* sound);
+    Mix_Chunk* GetSound(const std::string& soundId) const;
+    void UnloadSound(const std::string& soundId);
+
+    Mix_Music* LoadMusic(const std::string& musicId, const std::string& filePath);
+    void AddMusic(const std::string& musicId, Mix_Music* music);
+    Mix_Music* GetMusic(const std::string& musicId) const;
+    void UnloadMusic(const std::string& musicId);
+
     void UnloadAll();
 
 private:
@@ -29,4 +46,7 @@ private:
     AssetManager& operator=(const AssetManager&) = delete;
 
     std::unordered_map<std::string, SDL_Texture*> m_textureMap;
+    std::unordered_map<std::string, TTF_Font*> m_fontMap;
+    std::unordered_map<std::string, Mix_Chunk*> m_soundMap;
+    std::unordered_map<std::string, Mix_Music*> m_musicMap;
 };

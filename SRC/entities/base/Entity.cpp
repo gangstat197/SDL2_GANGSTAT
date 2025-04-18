@@ -120,7 +120,6 @@ Collider* Entity::GetColliderComponent() const {
 }
 
 void Entity::UpdateCollider() {
-    // std::cout << "Updating collider\n";
     m_collider->Update();
 }
 

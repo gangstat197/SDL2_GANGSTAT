@@ -21,9 +21,8 @@ public:
     float GetRotationSpeed() const;
     
     void SetMovementPattern(MovementPattern pattern);
-    void SetCustomMovementFunction(std::function<void(Entity*, float)> moveFunction);
     
-    bool CheckCollisionWithPlayer();
+    bool CheckCollisionWithPlayer(Player* player);
     
 protected:
     // Helper methods

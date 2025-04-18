@@ -36,6 +36,10 @@ Vector2D Vector2D::normalize() const {
     return Vector2D();
 }
 
+Vector2D Vector2D::perpendicular() const {
+    return Vector2D(-y, x);
+}
+
 void Vector2D::print() const {
     std::cerr << x << ',' << y << '\n';
 }

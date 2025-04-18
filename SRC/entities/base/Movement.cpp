@@ -31,11 +31,6 @@ void Movement::Update(float deltaTime) {
         case MovementPattern::SPIRAL:
             MoveSpiral(deltaTime);
             break;
-        case MovementPattern::CUSTOM:
-            if (m_customMoveFunction) {
-                m_customMoveFunction(m_owner, deltaTime);
-            }
-            break;
         case MovementPattern::NONE:
         default:
             break;
@@ -61,11 +56,6 @@ MovementPattern Movement::GetPattern() const {
 
 void Movement::SetInitialPosition(const Vector2D& position) {
     m_initialPosition = position;
-}
-
-void Movement::SetCustomMovementFunction(std::function<void(Entity*, float)> moveFunction) {
-    m_customMoveFunction = moveFunction;
-    m_pattern = MovementPattern::CUSTOM;
 }
 
 void Movement::CheckOffScreen(int screenWidth, int screenHeight, int margin) {
@@ -108,12 +98,14 @@ void Movement::MoveCurve(float deltaTime) {
     if (!m_owner) return;
     
     Vector2D pos = m_owner->GetPosition();
-    pos.y += m_speed * deltaTime;
     
-    float amplitude = 100.0f;
-    float frequency = 1.0f;
+    float a = 0.01f; 
+    float verticalSpeed = m_speed * 0.5f * deltaTime; 
     
-    pos.x = m_initialPosition.x + amplitude * sin(frequency * m_elapsedTime);
+    float distanceFromStart = pos.y - m_initialPosition.y;
+    pos.x = m_initialPosition.x + a * distanceFromStart * distanceFromStart;
+    
+    pos.y += verticalSpeed;
     
     m_owner->SetPosition(pos);
 }
@@ -121,7 +113,7 @@ void Movement::MoveCurve(float deltaTime) {
 void Movement::MoveSpiral(float deltaTime) {
     if (!m_owner) return;
     
-    float radius = 30.0f * m_elapsedTime;
+    float radius = 10.0f * m_elapsedTime;
     float angle = 5.0f * m_elapsedTime;
     
     Vector2D pos;

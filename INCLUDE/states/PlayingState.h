@@ -3,6 +3,7 @@
 #include <states/State.h>
 #include <entities/enemy/EnemySpawner.h>
 #include <entities/enemy/Enemy.h>
+#include <entities/player/Player.h>
 
 class PlayingState : public State {
 public:
@@ -10,6 +11,8 @@ public:
     ~PlayingState();
 
     void Init() override;
+
+    void InitPlayer();
     void HandleEvents() override;
     void Update() override;
     void Render() override;
@@ -20,4 +23,5 @@ private:
 
     EnemySpawner* m_enemySpawner;
     Enemy* m_test_enemy;
+    Player* m_player;
 };

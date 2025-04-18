@@ -3,10 +3,13 @@
 
 #include <SDL2/SDL.h>
 #include <vector>
-#include "../core/Renderer.h"
+#include <core/Renderer.h>
+
 #include <systems/InputSystem.h>
 #include <managers/AssetManager.h>
 #include <managers/GameStateManager.h>
+#include <managers/SoundManager.h>
+
 #include <states/MenuState.h>
 #include <states/PlayingState.h>
 #include <states/QuitState.h>
@@ -35,6 +38,7 @@ private:
     // Manager
     AssetManager* assetManager;
     GameStateManager* stateManager;
+    SoundManager* soundManager;
 
     // States
     std::shared_ptr<MenuState> menuState;

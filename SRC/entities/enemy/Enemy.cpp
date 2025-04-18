@@ -48,12 +48,10 @@ void Enemy::SetMovementPattern(MovementPattern pattern) {
     GetMovementComponent()->SetPattern(pattern);
 }
 
-void Enemy::SetCustomMovementFunction(std::function<void(Entity*, float)> moveFunction) {
-    GetMovementComponent()->SetCustomMovementFunction(moveFunction);
-}
-
-bool Enemy::CheckCollisionWithPlayer() {
-    return GetColliderComponent()->CheckCollision();
+bool Enemy::CheckCollisionWithPlayer(Player* player) {
+    if (!player) return false;
+    
+    return GetColliderComponent()->CheckCollision(player->GetColliderComponent());
 }
 
 void Enemy::CheckOffScreen() {
