@@ -29,7 +29,6 @@ Entity::~Entity() {}
 void Entity::Update(float deltaTime) {
     if (!m_isActive) return;
     
-    // Update movement and rotation components
     if (m_movement) {
         m_movement->Update(deltaTime);
     }
@@ -38,7 +37,6 @@ void Entity::Update(float deltaTime) {
         m_rotationComponent->Update(deltaTime);
     }
     
-    // Update collider position
     UpdateCollider();
 }
 
@@ -56,7 +54,6 @@ void Entity::Render() {
 void Entity::RenderDebug() {
     m_collider->RenderColliderDebug();
     
-    // Render the position of the entity
     m_renderer->RenderTexture(m_assetManager->GetTexture("debug_position"), m_position.x, m_position.y, 10, 10, 0);
 }
 
@@ -64,6 +61,12 @@ void Entity::SetPosition(const Vector2D& position) {
     m_position = position;
     UpdateCollider();
 }
+
+void Entity::SetInitialPosition(const Vector2D& position) {
+    m_movement->SetInitialPosition(position);
+    SetPosition(position);
+}
+
 
 void Entity::SetPosition(float x, float y) {
     m_position.x = x;
@@ -117,6 +120,20 @@ Rotation* Entity::GetRotationComponent() const {
 
 Collider* Entity::GetColliderComponent() const {
     return m_collider.get();
+}
+
+ColliderType Entity::GetColliderType() const {
+    if (m_collider) {
+        return m_collider->GetColliderType();
+    }
+    return ColliderType::CIRCLE;
+}
+
+void Entity::SetNewCollider(Collider* newCollider) {
+    if (newCollider) {
+        m_collider.reset(newCollider);
+        UpdateCollider();
+    }
 }
 
 void Entity::UpdateCollider() {

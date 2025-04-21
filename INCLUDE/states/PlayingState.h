@@ -4,24 +4,26 @@
 #include <entities/enemy/EnemySpawner.h>
 #include <entities/enemy/Enemy.h>
 #include <entities/player/Player.h>
+#include <utils/Timer.h>
 
 class PlayingState : public State {
 public:
-    PlayingState(Renderer* renderer, AssetManager* assetManager, InputSystem* input);
+    PlayingState(Renderer* renderer, AssetManager* assetManager, InputSystem* input, SoundManager* soundManager);
     ~PlayingState();
 
     void Init() override;
-
-    void InitPlayer();
     void HandleEvents() override;
     void Update() override;
     void Render() override;
     void Cleanup() override;
 
 private: 
-    void InitializeEnemySpawner();
+    void InitPlayer();
+    void InitEnemySpawner();
 
     EnemySpawner* m_enemySpawner;
-    Enemy* m_test_enemy;
     Player* m_player;
+    
+    Timer m_gameTimer;
+    float m_deltaTime;
 };

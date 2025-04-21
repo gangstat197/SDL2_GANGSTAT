@@ -39,6 +39,26 @@ SDL_Texture* AssetManager::GetTexture(const std::string& assetId) const {
     return nullptr;
 }
 
+int AssetManager::GetTextureWidth(const std::string& assetId) const {
+    auto it = m_textureMap.find(assetId);
+    if (it != m_textureMap.end()) {
+        int width;
+        SDL_QueryTexture(it->second, nullptr, nullptr, &width, nullptr);
+        return width;
+    }
+    return 0;
+}
+
+int AssetManager::GetTextureHeight(const std::string& assetId) const {
+    auto it = m_textureMap.find(assetId);
+    if (it != m_textureMap.end()) {
+        int height;
+        SDL_QueryTexture(it->second, nullptr, nullptr, nullptr, &height);
+        return height;
+    }
+    return 0;
+}
+
 SDL_Texture* AssetManager::ScaleTexture(const std::string& assetId, SDL_Texture& texture, SDL_Renderer* renderer, int width, int height) {
     SDL_Texture* scaledTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
     if (!scaledTexture) {
@@ -242,3 +262,24 @@ void AssetManager::UnloadMusic(const std::string& musicId) {
         m_musicMap.erase(it);
     }
 }
+
+SDL_Texture* AssetManager::LoadTexture(const std::string& assetId, const std::string& filePath, SDL_Renderer* renderer, double ratio) {
+    auto it = m_textureMap.find(assetId);
+    if (it != m_textureMap.end()) {
+        return it->second;
+    }
+    
+    std::string tempId = assetId + "_base";
+    SDL_Texture* baseTexture = LoadTexture(tempId, filePath, renderer);
+    
+    if (!baseTexture) {
+        return nullptr;
+    }
+    
+    SDL_Texture* scaledTexture = ScaleTexture(assetId, *baseTexture, renderer, ratio);
+    
+    UnloadTexture(tempId);
+    
+    return scaledTexture;
+}
+

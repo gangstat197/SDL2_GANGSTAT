@@ -20,6 +20,8 @@ public:
     
     void SetPosition(const Vector2D& position);
     void SetPosition(float x, float y);
+    void SetInitialPosition(const Vector2D& position);
+    
     Vector2D GetPosition() const;
 
     void SetScale(float scale);
@@ -36,10 +38,15 @@ public:
     bool IsActive() const;
     
     void RenderDebug();
+    
+    void SetNewCollider(Collider* newCollider);
 
     Movement* GetMovementComponent() const;
     Rotation* GetRotationComponent() const;
     Collider* GetColliderComponent() const;
+    ColliderType GetColliderType() const;
+    
+    const std::string& GetTextureId() const { return m_textureId; }
     
     Renderer* GetRenderer() const { return m_renderer; }
 protected:

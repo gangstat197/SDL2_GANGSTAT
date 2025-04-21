@@ -2,10 +2,13 @@
 #include <core/Game.h>
 #include <systems/InputSystem.h>
 #include <iostream>
+#include <utils/GameSettings.h>
 
 int main(int argc, char* argv[]) { 
     Game game;
-    if (!game.Init("Micro Dash", 600, 800)) {
+    if (!game.Init(GameSettings::GAME_TITLE, 
+                  GameSettings::SCREEN_WIDTH, 
+                  GameSettings::SCREEN_HEIGHT)) {
         std::cout << "Failed to init game.\n";
         return -1;
     }

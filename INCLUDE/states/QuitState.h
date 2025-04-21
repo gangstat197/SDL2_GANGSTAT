@@ -4,7 +4,7 @@
 
 class QuitState : public State {
 public:
-    QuitState(Renderer* renderer, AssetManager* assetManager, InputSystem* input, bool &isRunning);
+    QuitState(Renderer* renderer, AssetManager* assetManager, InputSystem* input, SoundManager* soundManager, bool &isRunning);
     ~QuitState();
 
     void Init() override;

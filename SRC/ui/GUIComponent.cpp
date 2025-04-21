@@ -12,7 +12,6 @@ GUIComponent::GUIComponent(Renderer* renderer, AssetManager* assetManager, Input
 }
 
 GUIComponent::~GUIComponent() {
-    // Base destructor, child classes will handle specific cleanup
 }
 
 void GUIComponent::Update() {

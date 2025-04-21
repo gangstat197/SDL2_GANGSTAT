@@ -1,43 +1,81 @@
 #include <entities/enemy/EnemySpawner.h>
 #include <entities/player/Player.h>
+#include <utils/GameSettings.h>
 #include <random>
 #include <ctime>
 #include <algorithm>
 #include <iostream>
 
-EnemySpawner::EnemySpawner(Renderer* renderer, AssetManager* assetManager, int screenWidth, int screenHeight)
+EnemySpawner::EnemySpawner(Renderer* renderer, AssetManager* assetManager)
     : m_renderer(renderer),
       m_assetManager(assetManager),
-      m_screenWidth(screenWidth),
-      m_screenHeight(screenHeight),
       m_spawnTimer(0.0f),
-      m_spawnRate(2.0f) {
+      m_spawnRate(GameSettings::SPAWN_RATE_MS / 1000.0f) {
     
     std::random_device rd;
     m_rng = std::mt19937(rd());
     
-    if (m_enemyTextureIds.empty()) {
-        m_enemyTextureIds.push_back("enemy_default");
+    for (int i = 0; i < MAX_ENEMY_TYPES; i++) {
+        m_enemyTemplates[i] = nullptr;
     }
+    
+    m_gameTimer.Start();
 }
 
 EnemySpawner::~EnemySpawner() {
-    m_enemies.clear();
+    Reset();
+    
+    for (int i = 0; i < MAX_ENEMY_TYPES; i++) {
+        if (m_enemyTemplates[i]) {
+            delete m_enemyTemplates[i];
+            m_enemyTemplates[i] = nullptr;
+        }
+    }
 }
 
-void EnemySpawner::Update(float deltaTime, float difficulty) {
+void EnemySpawner::Initialize() {    
+    Vector2D colliderPoints[] = {
+        Vector2D(-10, -10),
+        Vector2D(10, -10),
+        Vector2D(10, 10),
+        Vector2D(-10, 10)
+    };
+    
+
+    m_enemyTemplates[0] = new Enemy(m_renderer, m_assetManager, "enemy_round", ColliderType::CIRCLE);
+    m_enemyTemplates[0]->SetMovementPattern(MovementPattern::STRAIGHT);
+    m_enemyTemplates[0]->SetSpeed(GameSettings::ENEMY_BASE_SPEED);
+    m_enemyTemplates[0]->SetRotationSpeed(45.0f);
+    int width = m_enemyTemplates[0]->GetWidth();
+    m_enemyTemplates[0]->GetColliderComponent()->SetCircleCollider(width/2);
+
+    m_enemyTemplates[1] = new Enemy(m_renderer, m_assetManager, "enemy_round01", ColliderType::CIRCLE);
+    m_enemyTemplates[1]->SetMovementPattern(MovementPattern::ZIGZAG);
+    m_enemyTemplates[1]->SetSpeed(GameSettings::ENEMY_BASE_SPEED);
+    m_enemyTemplates[1]->SetRotationSpeed(90.0f);
+    width = m_enemyTemplates[1]->GetWidth();
+    m_enemyTemplates[1]->GetColliderComponent()->SetCircleCollider(width/2);
+}
+
+void EnemySpawner::Update(float deltaTime) {
     m_spawnTimer += deltaTime;
-    m_spawnRate = std::max(0.5f, 2.0f - (difficulty * 0.1f)); 
+    
+    float timeSinceStart = GetTimeSinceStart();
+    float difficulty = 1.0f + (timeSinceStart / (GameSettings::DIFFICULTY_INCREASE_TIME_MS / 1000.0f)); 
+
+    m_spawnRate = std::max(0.5f, (GameSettings::SPAWN_RATE_MS / 1000.0f) - (difficulty * 0.1f));
     
     if (m_spawnTimer >= m_spawnRate) {
         m_spawnTimer = 0.0f;
         
-        std::string textureId = GetRandomEnemyTextureId();
-        MovementPattern pattern = GetRandomMovementPattern();
+        std::uniform_int_distribution<int> dist(0, MAX_ENEMY_TYPES - 1);
+        int templateIndex = dist(m_rng);
         
-        auto enemy = SpawnEnemy(textureId, pattern);
-        
-        enemy->SetSpeed(100.0f + (difficulty * 10.0f)); 
+        auto enemy = SpawnEnemy(templateIndex);
+        if (enemy) {
+            float speedMultiplier = 1.0f + (difficulty * 0.1f);
+            enemy->SetSpeed(enemy->GetSpeed() * speedMultiplier);
+        }
     }
     
     for (auto& enemy : m_enemies) {
@@ -63,36 +101,41 @@ void EnemySpawner::Render() {
     }
 }
 
-std::shared_ptr<Enemy> EnemySpawner::SpawnEnemy(const std::string& textureId, MovementPattern pattern) {
-    auto enemy = std::make_shared<Enemy>(m_renderer, m_assetManager, textureId, ColliderType::CIRCLE);
+std::shared_ptr<Enemy> EnemySpawner::SpawnEnemy(int templateIndex) {
+    if (templateIndex < 0 || templateIndex >= MAX_ENEMY_TYPES || !m_enemyTemplates[templateIndex]) {
+        return nullptr;
+    }
+    
+    Enemy* templateEnemy = m_enemyTemplates[templateIndex];
+    ColliderType colliderType = templateEnemy->GetColliderType();
+    
+    auto enemy = std::make_shared<Enemy>(m_renderer, m_assetManager, 
+                                       templateEnemy->GetTextureId(), 
+                                       colliderType);
     
     Vector2D spawnPos = GetRandomSpawnPosition();
-    enemy->SetPosition(spawnPos);
+    enemy->SetInitialPosition(spawnPos);
     
-    enemy->SetMovementPattern(pattern);
+    enemy->SetMovementPattern(templateEnemy->GetMovementComponent()->GetPattern());
+    enemy->SetSpeed(templateEnemy->GetMovementComponent()->GetSpeed());
+    enemy->SetRotationSpeed(templateEnemy->GetRotationComponent()->GetRotationSpeed());
     
-    switch (pattern) {
-        case MovementPattern::STRAIGHT:
-            enemy->SetRotationSpeed(45.0f);
+    switch (colliderType) {
+        case ColliderType::CIRCLE: {
+            int width = enemy->GetWidth();
+            enemy->GetColliderComponent()->SetCircleCollider(width/2);
             break;
-            
-        case MovementPattern::ZIGZAG:
-            enemy->SetRotationSpeed(90.0f);
+        }
+        case ColliderType::POLYGON: {
+            Collider* templateCollider = templateEnemy->GetColliderComponent();
+            if (templateCollider) {
+                const std::vector<Vector2D>& points = templateCollider->GetPolygonPoints();
+                if (!points.empty()) {
+                    enemy->GetColliderComponent()->SetPolygonCollider(points.size(), points);
+                }
+            }
             break;
-            
-        case MovementPattern::CURVE:
-            enemy->SetRotationSpeed(60.0f);
-            break;
-            
-        case MovementPattern::SPIRAL:
-            enemy->SetRotationSpeed(120.0f);
-            break;
-            
-        case MovementPattern::NONE:
-        default:
-            std::uniform_real_distribution<float> rotDist(-60.0f, 60.0f);
-            enemy->SetRotationSpeed(rotDist(m_rng));
-            break;
+        }
     }
     
     m_enemies.push_back(enemy);
@@ -106,10 +149,9 @@ bool EnemySpawner::CheckCollisions(Player* player) {
     for (auto& enemy : m_enemies) {
         if (enemy && enemy->IsActive() && enemy->CheckCollisionWithPlayer(player)) {
             if (!player->IsInvincible()) {
-                player->SetInvincible(true, 1.0f);
-                player->SetActive(false);
+                player->Hit();
+                return true;
             }
-            return true;
         }
     }
     
@@ -120,44 +162,24 @@ void EnemySpawner::Reset() {
     m_enemies.clear();
     
     m_spawnTimer = 0.0f;
-    m_spawnRate = 2.0f;
+    m_spawnRate = GameSettings::SPAWN_RATE_MS / 1000.0f;
+    m_gameTimer.Start();
 }
 
-void EnemySpawner::AddEnemyTexture(const std::string& textureId) {
-    if (std::find(m_enemyTextureIds.begin(), m_enemyTextureIds.end(), textureId) == m_enemyTextureIds.end()) {
-        m_enemyTextureIds.push_back(textureId);
-    }
+float EnemySpawner::GetTimeSinceStart() const {
+    return m_gameTimer.GetSeconds();
 }
 
 Vector2D EnemySpawner::GetRandomSpawnPosition() {
-    std::uniform_int_distribution<int> xDist(30, m_screenWidth - 30);
+    int marginX = GameSettings::SCREEN_WIDTH * 0.05;
+    int minX = marginX;
+    int maxX = GameSettings::SCREEN_WIDTH - marginX;
     
+    std::uniform_int_distribution<int> xDist(minX, maxX);
     int x = xDist(m_rng);
-    int y = -30; 
+    
+    int y = -30;
     
     return Vector2D(x, y);
 }
 
-MovementPattern EnemySpawner::GetRandomMovementPattern() {
-    std::uniform_int_distribution<int> patternDist(0, 3); 
-    int pattern = patternDist(m_rng);
-    
-    switch (pattern) {
-        case 0: return MovementPattern::STRAIGHT;
-        case 1: return MovementPattern::ZIGZAG;
-        case 2: return MovementPattern::CURVE;
-        case 3: return MovementPattern::SPIRAL;
-        default: return MovementPattern::STRAIGHT;
-    }
-}
-
-std::string EnemySpawner::GetRandomEnemyTextureId() {
-    if (m_enemyTextureIds.empty()) {
-        return "enemy_default";
-    }
-    
-    std::uniform_int_distribution<int> textureDist(0, m_enemyTextureIds.size() - 1);
-    int index = textureDist(m_rng);
-    
-    return m_enemyTextureIds[index];
-}

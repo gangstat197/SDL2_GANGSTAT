@@ -11,10 +11,13 @@ public:
     static AssetManager& Instance();
 
     SDL_Texture* LoadTexture(const std::string& assetId, const std::string& filePath, SDL_Renderer* renderer);
+    SDL_Texture* LoadTexture(const std::string& assetId, const std::string& filePath, SDL_Renderer* renderer, double ratio);
 
     void AddTexture(const std::string& assetId, SDL_Texture* texture);
     
     SDL_Texture* GetTexture(const std::string& assetId) const;
+    int GetTextureWidth(const std::string& assetId) const;
+    int GetTextureHeight(const std::string& assetId) const;
     
     SDL_Texture* ScaleTexture(const std::string& assetId, SDL_Texture& texture, SDL_Renderer* renderer, int width, int height);
     SDL_Texture* ScaleTexture(const std::string& assetId, SDL_Texture& texture, SDL_Renderer* renderer, double ratio);

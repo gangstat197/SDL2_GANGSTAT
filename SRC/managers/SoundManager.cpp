@@ -1,5 +1,6 @@
 #include <managers/SoundManager.h>
 #include <iostream>
+#include <utils/GameSettings.h>
 
 SoundManager& SoundManager::Instance() {
     static SoundManager instance;
@@ -9,10 +10,10 @@ SoundManager& SoundManager::Instance() {
 SoundManager::SoundManager()
     : m_assetManager(AssetManager::Instance()),
       m_initialized(false),
-      m_musicEnabled(true),
-      m_soundEnabled(true),
-      m_musicVolume(MIX_MAX_VOLUME),
-      m_soundVolume(MIX_MAX_VOLUME),
+      m_musicEnabled(GameSettings::MUSIC_ENABLED),
+      m_soundEnabled(GameSettings::SOUND_ENABLED),
+      m_musicVolume(static_cast<int>(GameSettings::MUSIC_VOLUME * MIX_MAX_VOLUME)),
+      m_soundVolume(static_cast<int>(GameSettings::SOUND_VOLUME * MIX_MAX_VOLUME)),
       m_masterVolume(MIX_MAX_VOLUME) {
 }
 
@@ -36,6 +37,9 @@ bool SoundManager::Initialize() {
         std::cerr << "SDL_mixer could not initialize! SDL_mixer Error: " << Mix_GetError() << std::endl;
         return false;
     }
+    
+    // Allocate more channels for sound effects (default is 8)
+    Mix_AllocateChannels(32);
     
     m_initialized = true;
     return true;
@@ -203,4 +207,8 @@ void SoundManager::SetSoundEnabled(bool enabled) {
     if (!m_initialized || !enabled) {
         StopAllSounds();
     }
+}
+
+bool SoundManager::IsSoundEnabled() const {
+    return m_soundEnabled;
 }

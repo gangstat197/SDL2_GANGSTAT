@@ -5,11 +5,12 @@
 // Base state implementation is empty since it's purely virtual
 // Individual state implementations are in their own files now
 
-State::State(Renderer* renderer, AssetManager* assetManager, InputSystem* input)
+State::State(Renderer* renderer, AssetManager* assetManager, InputSystem* input, SoundManager* soundManager)
     : m_stateManager(nullptr),
       m_renderer(renderer),
       m_assetManager(assetManager),
       m_input(input),
+      m_soundManager(soundManager),
       m_backgroundManager(nullptr),
       m_cursor(nullptr) {
 }

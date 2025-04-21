@@ -9,7 +9,7 @@
 
 class MenuState : public State {
 public:
-  MenuState(Renderer* renderer, AssetManager* assetManager, InputSystem* input);
+  MenuState(Renderer* renderer, AssetManager* assetManager, InputSystem* input, SoundManager* soundManager);
   ~MenuState();
   
   void Init() override;

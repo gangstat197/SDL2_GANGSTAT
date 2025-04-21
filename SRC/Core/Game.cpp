@@ -4,6 +4,8 @@
 #include <systems/InputSystem.h>
 #include <utils/Vector2D.h>
 #include <utils/SpriteSheet.h>
+#include <utils/GameSettings.h>
+#include <SDL2/SDL_mixer.h>
 
 #include <iostream>
 
@@ -58,59 +60,63 @@ bool Game::Init(const char* title, int width, int height) {
 
 void Game::LoadAssets() {
     // Load Background texture
-    SDL_Texture* backgroundTexture = assetManager->LoadTexture("background", "assets/images/WhiteGrid_Background.png", renderer->GetSDLRenderer());
+    assetManager->LoadTexture("background", "assets/images/WhiteGrid_Background.png", renderer->GetSDLRenderer());
 
-    if (backgroundTexture == nullptr) {
-        std::cout << "Failed to load background texture\n";
-        return;
-    }
-
-    // Load Heading texture
-    SDL_Texture* headingTexture = assetManager->LoadTexture("heading", "assets/images/MicroDash_Hero.png", renderer->GetSDLRenderer());
-
-    if (headingTexture == nullptr) {
+    // Load Heading texture with scaling
+    SDL_Texture* headingTexture = assetManager->LoadTexture("heading", "assets/images/MicroDash_Hero.png", renderer->GetSDLRenderer(), 0.25);
+    if (!headingTexture) {
         std::cout << "Failed to load heading texture\n";
         return;
     }
-
-    headingTexture = assetManager->ScaleTexture("heading", *headingTexture, renderer->GetSDLRenderer(), 0.25);
     
     // Load cursor texture
-    SDL_Texture* cursorTexture = assetManager->LoadTexture("mouse_cursor", "assets/images/cursor_yellow.png", renderer->GetSDLRenderer());
+    assetManager->LoadTexture("mouse_cursor", "assets/images/cursor_yellow.png", renderer->GetSDLRenderer());
     
-    // Load UI textures
-    SDL_Texture* playButtonTexture = assetManager->LoadTexture("button_play", "assets/images/ui/btn_play.png", renderer->GetSDLRenderer());
-    playButtonTexture = assetManager->ScaleTexture("button_play", *playButtonTexture, renderer->GetSDLRenderer(), 0.25);
+    // Load UI textures with scaling
+    assetManager->LoadTexture("button_play", "assets/images/ui/btn_play.png", renderer->GetSDLRenderer(), 0.25);
+    assetManager->LoadTexture("button_options", "assets/images/ui/btn_options.png", renderer->GetSDLRenderer(), 0.25);
+    assetManager->LoadTexture("button_quit", "assets/images/ui/btn_quit.png", renderer->GetSDLRenderer(), 0.25);
+    assetManager->LoadTexture("debug_position", "assets/images/debug/debug_reddot.png", renderer->GetSDLRenderer(), 0.5);
+
+    // Load player texture with scaling
+    assetManager->LoadTexture("player", "assets/images/player/mr_square.png", renderer->GetSDLRenderer(), 0.15);
+
+    // Load hit effect
+    assetManager->LoadTexture("hit_vignette", "assets/images/player/hit_vignette.png", renderer->GetSDLRenderer());
     
-    SDL_Texture* optionsButtonTexture = assetManager->LoadTexture("button_options", "assets/images/ui/btn_options.png", renderer->GetSDLRenderer());
-    optionsButtonTexture = assetManager->ScaleTexture("button_options", *optionsButtonTexture, renderer->GetSDLRenderer(), 0.25);
-
-    SDL_Texture* exitButtonTexture = assetManager->LoadTexture("button_quit", "assets/images/ui/btn_quit.png", renderer->GetSDLRenderer());
-    exitButtonTexture = assetManager->ScaleTexture("button_quit", *exitButtonTexture, renderer->GetSDLRenderer(), 0.25);
-
-    SDL_Texture* debug_position = assetManager->LoadTexture("debug_position", "assets/images/debug/debug_reddot.png", renderer->GetSDLRenderer());
-    debug_position = assetManager->ScaleTexture("debug_position", *debug_position, renderer->GetSDLRenderer(), 0.5);
-
-    // Load player texture
-    SDL_Texture* playerTexture = assetManager->LoadTexture("player", "assets/images/player/mr_square.png", renderer->GetSDLRenderer());
-    playerTexture = assetManager->ScaleTexture("player", *playerTexture, renderer->GetSDLRenderer(), 0.15);
-
-    // Load enemy texture
-    SDL_Texture* enemyTexture = assetManager->LoadTexture("enemy_round", "assets/images/enemy/bacteria_round.png", renderer->GetSDLRenderer());
-    enemyTexture = assetManager->ScaleTexture("enemy_round", *enemyTexture, renderer->GetSDLRenderer(), 0.5);
-
+    // Load enemy textures
+    assetManager->LoadTexture("enemy_round", "assets/images/enemy/bacteria_round.png", renderer->GetSDLRenderer(), 0.8);
+    assetManager->LoadTexture("enemy_round01", "assets/images/enemy/bacteria_round01.png", renderer->GetSDLRenderer(), 0.6);
+    assetManager->LoadTexture("enemy_round02", "assets/images/enemy/bacteria_round02.png", renderer->GetSDLRenderer(), 0.8);
+    assetManager->LoadTexture("enemy_rectangle", "assets/images/enemy/bacteria_rectangle.png", renderer->GetSDLRenderer());
+    assetManager->LoadTexture("enemy_polyon01", "assets/images/enemy/bacteria_polygon01.png", renderer->GetSDLRenderer());
+    assetManager->LoadTexture("enemy_polyon02", "assets/images/enemy/bacteria_polygon02.png", renderer->GetSDLRenderer());
+    assetManager->LoadTexture("enemy_polyon03", "assets/images/enemy/bacteria_polygon03.png", renderer->GetSDLRenderer());
+    
     // Load music
     assetManager->LoadMusic("main_theme", "assets/sounds/main_theme.mp3");
 
-    // Play music
-    soundManager->PlayMusic("main_theme", -1);
+    // Load sound effects
+    assetManager->LoadSound("button_click", "assets/sounds/button_click.wav");
+    assetManager->LoadSound("button_hover", "assets/sounds/button_hover.wav");
+    assetManager->LoadSound("player_hit", "assets/sounds/hit.wav");
+
+    // Set Sound Manager Volume and state based on settings
+    soundManager->SetMusicVolume(static_cast<int>(GameSettings::MUSIC_VOLUME * MIX_MAX_VOLUME));  
+    soundManager->SetSoundVolume(static_cast<int>(GameSettings::SOUND_VOLUME * MIX_MAX_VOLUME));
+    soundManager->SetMusicEnabled(GameSettings::MUSIC_ENABLED);
+    soundManager->SetSoundEnabled(GameSettings::SOUND_ENABLED);
+    
+    if (GameSettings::MUSIC_ENABLED) {
+        soundManager->PlayMusic("main_theme", -1);
+    }
 }
 
 void Game::InitStates() {
     // Initialize states 
-    menuState = std::make_shared<MenuState>(renderer, assetManager, input);
-    playingState = std::make_shared<PlayingState>(renderer, assetManager, input);
-    quitState = std::make_shared<QuitState>(renderer, assetManager, input, isRunning);
+    menuState = std::make_shared<MenuState>(renderer, assetManager, input, soundManager);
+    playingState = std::make_shared<PlayingState>(renderer, assetManager, input, soundManager);
+    quitState = std::make_shared<QuitState>(renderer, assetManager, input, soundManager, isRunning);
     
     // Register states 
     stateManager->RegisterState(GameStates::MENU, menuState);

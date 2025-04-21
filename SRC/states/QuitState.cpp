@@ -1,8 +1,8 @@
 #include <states/QuitState.h>
 #include <iostream>
 
-QuitState::QuitState(Renderer* renderer, AssetManager* assetManager, InputSystem* input, bool &isRunning)
-    : State(renderer, assetManager, input) {
+QuitState::QuitState(Renderer* renderer, AssetManager* assetManager, InputSystem* input, SoundManager* soundManager, bool &isRunning)
+    : State(renderer, assetManager, input, soundManager) {
     m_isRunning = &isRunning;
 }
 

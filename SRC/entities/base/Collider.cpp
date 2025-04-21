@@ -3,6 +3,8 @@
 #include <SDL2/SDL.h> 
 #include <cmath>
 #include <iostream>
+#include <utils/Vector2D.h>
+#include <algorithm>
 
 Collider::Collider(Entity* owner, ColliderType colliderType)
     : m_owner(owner),
@@ -14,6 +16,8 @@ Collider::Collider(Entity* owner, ColliderType colliderType)
 }
 
 Collider::~Collider() {
+    m_points.clear();
+    m_originalPoints.clear();
 }
 
 void Collider::Update(float deltaTime) {
@@ -28,33 +32,40 @@ void Collider::Update(float deltaTime) {
 }
 
 void Collider::UpdateMovement() {
-  SetPosition(m_owner->GetPosition());
+  Vector2D ownerPosition = m_owner->GetPosition();
+
+  switch (m_colliderType) {
+    case ColliderType::CIRCLE:
+      break;
+      
+    case ColliderType::POLYGON:
+      for (size_t i = 0; i < m_points.size(); ++i) {
+        m_points[i] = m_originalPoints[i] + ownerPosition;
+      }
+      break;
+  }
 }
 
 void Collider::UpdateRotation() {
-  if (m_colliderType == ColliderType::CIRCLE) {
-    return;
-  }
-  
-  if (m_originalPoints.empty()) {
-    return; // Don't try to rotate if we have no points
-  }
-  
-  float rotation = m_owner->GetRotation();
-  Vector2D center = m_owner->GetPosition();
-  float angle = rotation * M_PI / 180.0f; 
-
-  m_points.clear();
-
-
-  for (auto& point : m_originalPoints) {
-    float cosAngle = cos(angle);
-    float sinAngle = sin(angle);
+  if (m_colliderType == ColliderType::POLYGON) {
+    float rotation = m_owner->GetRotation();
+    Vector2D ownerPosition = m_owner->GetPosition();
     
-    float newX = point.x * cosAngle - point.y * sinAngle;
-    float newY = point.x * sinAngle + point.y * cosAngle;
-    
-    m_points.push_back(center + Vector2D(newX, newY));
+    for (size_t i = 0; i < m_points.size(); ++i) {
+      // Calculate relative position
+      Vector2D relativePos = m_originalPoints[i];
+      
+      // Apply rotation
+      float cosA = std::cos(rotation * (M_PI / 180.0f));
+      float sinA = std::sin(rotation * (M_PI / 180.0f));
+      
+      float rotatedX = relativePos.x * cosA - relativePos.y * sinA;
+      float rotatedY = relativePos.x * sinA + relativePos.y * cosA;
+      
+      // Set the rotated position relative to the owner
+      m_points[i].x = rotatedX + ownerPosition.x;
+      m_points[i].y = rotatedY + ownerPosition.y;
+    }
   }
 }
 
@@ -64,6 +75,10 @@ ColliderType Collider::GetColliderType() const {
 
 std::vector<Vector2D> Collider::GetPoints() const {
     return m_points;
+}
+
+std::vector<Vector2D> Collider::GetPolygonPoints() const {
+    return m_originalPoints;
 }
 
 float Collider::GetRadius() const {
@@ -78,6 +93,7 @@ void Collider::SetPosition(const Vector2D& position) {
       UpdateRotation();
     }
   }
+  m_owner->SetPosition(position);
 }
 
 Vector2D Collider::GetPosition() const {
@@ -88,11 +104,11 @@ void Collider::SetColliderType(ColliderType type) {
     m_colliderType = type;
 }
 
-void Collider::SetPolygonCollider(int numPoints, std::vector<Vector2D>* points) {
+void Collider::SetPolygonCollider(int numPoints, const std::vector<Vector2D>& points) {
     SetColliderType(ColliderType::POLYGON);
-    if (points && !points->empty()) {
-        m_originalPoints = *points;
-        m_points = *points;
+    if (!points.empty()) {
+        m_originalPoints = points;
+        m_points = points;
         
         if (m_owner) {
             UpdateRotation();

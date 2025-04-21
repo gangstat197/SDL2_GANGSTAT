@@ -24,13 +24,14 @@ public:
     
     ColliderType GetColliderType() const;
     std::vector<Vector2D> GetPoints() const;
+    std::vector<Vector2D> GetPolygonPoints() const;
     float GetRadius() const;
     Vector2D GetPosition() const;
     
     void SetPosition(const Vector2D& position);
     void SetColliderType(ColliderType type);
     
-    void SetPolygonCollider(int numPoints, std::vector<Vector2D>* points);
+    void SetPolygonCollider(int numPoints, const std::vector<Vector2D>& points);
     void SetCircleCollider(float radius);
     
     void RenderColliderDebug();
@@ -44,7 +45,7 @@ private:
     ColliderType m_colliderType;
     float m_radius;
     std::vector<Vector2D> m_points;
-    std::vector<Vector2D> m_originalPoints; // Original polygon points before rotation
+    std::vector<Vector2D> m_originalPoints; 
 };
 
 

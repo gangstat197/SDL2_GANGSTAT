@@ -1,0 +1,30 @@
+# Compiled output
+*.exe
+*.dll
+*.o
+*.obj
+*.out
+
+# Build directories
+bin/
+build/
+obj/
+
+# IDE and editor files
+.vscode/
+.vs/
+.idea/
+*.swp
+*.swo
+
+# SDL2 specific
+SDL2*.dll
+
+# Context file for local development
+context.dat
+context.json
+*.context
+
+# Cursor AI prompt engineering
+prompt_context.md
+cursor_prompt_examples.md 

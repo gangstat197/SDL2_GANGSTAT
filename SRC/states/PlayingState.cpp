@@ -1,16 +1,28 @@
 #include <states/PlayingState.h>
 #include <iostream>
+#include <utils/GameSettings.h>
 
-PlayingState::PlayingState(Renderer* renderer, AssetManager* assetManager, InputSystem* input)
-    : State(renderer, assetManager, input) {
+PlayingState::PlayingState(Renderer* renderer, AssetManager* assetManager, InputSystem* input, SoundManager* soundManager)
+    : State(renderer, assetManager, input, soundManager),
+      m_player(nullptr),
+      m_enemySpawner(nullptr),
+      m_deltaTime(0.016f) {
 }
 
 PlayingState::~PlayingState() {
+    if (m_player) {
+        delete m_player;
+        m_player = nullptr;
+    }
+    
+    if (m_enemySpawner) {
+        delete m_enemySpawner;
+        m_enemySpawner = nullptr;
+    }
 }
 
 void PlayingState::InitPlayer() {
-    // Intialize player
-    m_player = new Player(m_renderer, m_assetManager, m_input, "player");
+    m_player = new Player(m_renderer, m_assetManager, m_input, m_soundManager, "player");
 
     int width = m_player->GetWidth();
     int height = m_player->GetHeight();
@@ -22,69 +34,55 @@ void PlayingState::InitPlayer() {
         Vector2D(-width/2, height/2),
     };
 
-    m_player->GetColliderComponent()->SetPolygonCollider(4, &playerColliderPoints);
+    m_player->GetColliderComponent()->SetPolygonCollider(4, playerColliderPoints);
+    m_player->SetPosition(GameSettings::SCREEN_WIDTH/2, GameSettings::SCREEN_HEIGHT - 100);
+}
+
+void PlayingState::InitEnemySpawner() {
+    m_enemySpawner = new EnemySpawner(m_renderer, m_assetManager);
+    m_enemySpawner->Initialize();
 }
 
 void PlayingState::Init() {
     std::cout << "PlayingState initialized\n";
     
-    
-    InitializeBackground("background", 800, 800, 30);
-
+    InitializeBackground("background", 
+                         GameSettings::SCREEN_WIDTH, 
+                         GameSettings::SCREEN_HEIGHT, 
+                         GameSettings::BACKGROUND_SCROLL_SPEED);
     InitPlayer();
+    InitEnemySpawner();
 
-    // Load enemy texture
-    // SDL_Texture* enemy_texture = m_assetManager->LoadTexture("enemy", "assets/images/test_bacteria.png", m_renderer->GetSDLRenderer());
-    // enemy_texture = m_assetManager->ScaleTexture("enemy", *enemy_texture, m_renderer->GetSDLRenderer(), 0.25);
- 
-    // // // Create a test enemy
-    // m_test_enemy = new Enemy(m_renderer, m_assetManager, "enemy", ColliderType::POLYGON);
-
-    // int width = m_test_enemy->GetWidth();
-    // int height = m_test_enemy->GetHeight();
-
-    // std::vector<Vector2D> points = {
-    //     Vector2D(-width/2, -height/2),
-    //     Vector2D(width/2, -height/2),
-    //     Vector2D(width/2, height/2),
-    //     Vector2D(-width/2, height/2),
-    // };
-
-    // m_test_enemy->GetColliderComponent()->SetPolygonCollider(4, &points);
-    // m_test_enemy->SetPosition(Vector2D(200, 200));
-    // m_test_enemy->SetSpeed(20); 
-    // m_test_enemy->SetRotationSpeed(10);
-    // m_test_enemy->SetMovementPattern(MovementPattern::CURVE);
-
-    // Create a new enemy
-    m_test_enemy = new Enemy(m_renderer, m_assetManager, "enemy_round", ColliderType::CIRCLE);
-
-    int width = m_test_enemy->GetWidth(); 
-    
-    m_test_enemy->GetColliderComponent()->SetCircleCollider(width/2);    
-    m_test_enemy->SetPosition(Vector2D(400, 400));
-    m_test_enemy->SetSpeed(20);
-    m_test_enemy->SetRotationSpeed(10);
-    m_test_enemy->SetMovementPattern(MovementPattern::STRAIGHT);
+    m_gameTimer.Start();
 }
 
 void PlayingState::HandleEvents() {
-    m_input->HandleEvents();
 }
 
 void PlayingState::Update() {
-    float deltaTime = 0.016f; 
+    static Uint32 lastTime = SDL_GetTicks();
+    Uint32 currentTime = SDL_GetTicks();
+    m_deltaTime = (currentTime - lastTime) / 1000.0f;
+    lastTime = currentTime;
     
-    m_test_enemy->Update(deltaTime);
-    m_player->Update(deltaTime);
-    std::cout << "Collision: " << m_test_enemy->GetColliderComponent()->CheckCollision(m_player->GetColliderComponent()) << std::endl;
+    if (m_deltaTime > 0.1f) {
+        m_deltaTime = 0.1f;
+    }
+    
+    m_player->Update(m_deltaTime);
+    m_enemySpawner->Update(m_deltaTime);
+    
+    if (m_enemySpawner->CheckCollisions(m_player)) {
+        std::cout << "Player hit by enemy!" << std::endl;
+    }
+
 }
 
 void PlayingState::Render() {
     m_backgroundManager->RenderBackground();
     m_backgroundManager->InfiniteBackground();
     
-    m_test_enemy->Render();
+    m_enemySpawner->Render();
     m_player->Render();
 }
 
