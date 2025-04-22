@@ -6,7 +6,9 @@ Movement::Movement(Entity* owner)
     : m_owner(owner),
       m_speed(100.0f),
       m_pattern(MovementPattern::NONE),
-      m_elapsedTime(0.0f) {
+      m_elapsedTime(0.0f),
+      m_amplitudeRatio(1.0f),
+      m_freqRatio(1.0f) {
     m_initialPosition = owner ? owner->GetPosition() : Vector2D(0, 0);
 }
 
@@ -80,14 +82,19 @@ void Movement::MoveStraight(float deltaTime) {
     m_owner->SetPosition(pos);
 }
 
+void Movement::SetZigzagConfig(float amplitudeRatio, float freqRatio) {
+    m_amplitudeRatio = amplitudeRatio;
+    m_freqRatio = freqRatio;
+}
+
 void Movement::MoveZigZag(float deltaTime) {
     if (!m_owner) return;
     
     Vector2D pos = m_owner->GetPosition();
     pos.y += m_speed * deltaTime;
     
-    float amplitude = 50.0f; 
-    float frequency = 2.0f;
+    float amplitude = 50.0f * m_amplitudeRatio; 
+    float frequency = 2.0f * m_freqRatio;
     
     pos.x = m_initialPosition.x + amplitude * sin(frequency * m_elapsedTime);
     

@@ -16,7 +16,7 @@ namespace GameSettings {
     inline constexpr float BACKGROUND_SCROLL_SPEED = 150.0f;
     inline constexpr float ENEMY_BASE_SPEED = 200.0f;
     inline constexpr float ENEMY_SPEED_INCREMENT = 10.0f;  
-    inline constexpr int SPAWN_RATE_MS = 1600;  
+    inline constexpr int SPAWN_RATE_MS = 1400;  
     inline constexpr int DIFFICULTY_INCREASE_TIME_MS = 10000;  
     
     // Power-up settings

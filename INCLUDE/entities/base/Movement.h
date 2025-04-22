@@ -19,22 +19,21 @@ public:
     Movement(Entity* owner);
     ~Movement();
     
-    // Update the entity's position based on current movement pattern
     void Update(float deltaTime);
     
-    // Set movement properties
     void SetSpeed(float speed);
     float GetSpeed() const;
     
-    // Set and get pattern
     void SetPattern(MovementPattern pattern);
     MovementPattern GetPattern() const;
     
-    // Set initial position (reference point for patterns)
     void SetInitialPosition(const Vector2D& position);
     
-    // Utility function to check if entity is off screen and deactivate it
     void CheckOffScreen(int screenWidth = 800, int screenHeight = 600, int margin = 100);
+
+    void SetZigzagConfig(float amplitudeRatio, float freqRatio);
+    float GetAmplitudeRatio() const { return m_amplitudeRatio; }
+    float GetFrequencyRatio() const { return m_freqRatio; }
     
 private:
     Entity* m_owner;
@@ -42,6 +41,9 @@ private:
     MovementPattern m_pattern;
     float m_elapsedTime;
     Vector2D m_initialPosition;
+
+    float m_amplitudeRatio;
+    float m_freqRatio;
     
     // Movement pattern implementations
     void MoveStraight(float deltaTime);

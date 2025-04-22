@@ -34,27 +34,99 @@ EnemySpawner::~EnemySpawner() {
 }
 
 void EnemySpawner::Initialize() {    
-    Vector2D colliderPoints[] = {
-        Vector2D(-10, -10),
-        Vector2D(10, -10),
-        Vector2D(10, 10),
-        Vector2D(-10, 10)
-    };
-    
+    // Init Var
+    int width, height; 
+    std::vector<Vector2D> colliderPoints;
 
+
+    // ENEMY 1
     m_enemyTemplates[0] = new Enemy(m_renderer, m_assetManager, "enemy_round", ColliderType::CIRCLE);
     m_enemyTemplates[0]->SetMovementPattern(MovementPattern::STRAIGHT);
-    m_enemyTemplates[0]->SetSpeed(GameSettings::ENEMY_BASE_SPEED);
+    m_enemyTemplates[0]->SetSpeed(GameSettings::ENEMY_BASE_SPEED * 1.5f);
     m_enemyTemplates[0]->SetRotationSpeed(45.0f);
-    int width = m_enemyTemplates[0]->GetWidth();
+    width = m_enemyTemplates[0]->GetWidth();
     m_enemyTemplates[0]->GetColliderComponent()->SetCircleCollider(width/2);
 
+    // ENEMY 2
     m_enemyTemplates[1] = new Enemy(m_renderer, m_assetManager, "enemy_round01", ColliderType::CIRCLE);
     m_enemyTemplates[1]->SetMovementPattern(MovementPattern::ZIGZAG);
-    m_enemyTemplates[1]->SetSpeed(GameSettings::ENEMY_BASE_SPEED);
-    m_enemyTemplates[1]->SetRotationSpeed(90.0f);
+    m_enemyTemplates[1]->SetSpeed(GameSettings::ENEMY_BASE_SPEED * 1.5f);
+    m_enemyTemplates[1]->SetRotationSpeed(0.0f);
+    m_enemyTemplates[1]->GetMovementComponent()->SetZigzagConfig(1.0f, 1.0f);
     width = m_enemyTemplates[1]->GetWidth();
     m_enemyTemplates[1]->GetColliderComponent()->SetCircleCollider(width/2);
+
+
+    // ENEMY 3
+    m_enemyTemplates[2] = new Enemy(m_renderer, m_assetManager, "enemy_round02", ColliderType::CIRCLE);
+    m_enemyTemplates[2]->SetMovementPattern(MovementPattern::STRAIGHT);
+    m_enemyTemplates[2]->SetSpeed(GameSettings::ENEMY_BASE_SPEED * 3);
+    m_enemyTemplates[2]->SetRotationSpeed(90.0f);
+    width = m_enemyTemplates[2]->GetWidth();
+    m_enemyTemplates[2]->GetColliderComponent()->SetCircleCollider(width/2);    
+
+
+    // ENEMY 4
+    m_enemyTemplates[3] = new Enemy(m_renderer, m_assetManager, "enemy_rectangle", ColliderType::POLYGON);
+    m_enemyTemplates[3]->SetMovementPattern(MovementPattern::ZIGZAG);
+    m_enemyTemplates[3]->SetSpeed(GameSettings::ENEMY_BASE_SPEED);
+    m_enemyTemplates[3]->SetRotationSpeed(0.0f);
+
+    m_enemyTemplates[3]->GetMovementComponent()->SetZigzagConfig(1.5f, 2.0f);
+
+    height = m_enemyTemplates[3]->GetHeight();
+    width = m_enemyTemplates[3]->GetWidth();
+
+    colliderPoints = {
+        Vector2D(-width / 2, -height / 2),
+        Vector2D(-width / 2,  height / 2),
+        Vector2D( width / 2,  height / 2),
+        Vector2D( width / 2, -height / 2)
+    };
+
+    m_enemyTemplates[3]->GetColliderComponent()->SetPolygonCollider(4, colliderPoints);
+
+    // ENEMY 5 
+    m_enemyTemplates[4] = new Enemy(m_renderer, m_assetManager, "enemy_polyon01", ColliderType::POLYGON);
+    m_enemyTemplates[4]->SetMovementPattern(MovementPattern::ZIGZAG);
+    m_enemyTemplates[4]->SetSpeed(GameSettings::ENEMY_BASE_SPEED * 1.2f);
+    m_enemyTemplates[4]->SetRotationSpeed(45.0f);
+
+    height = m_enemyTemplates[4]->GetHeight();
+    width = m_enemyTemplates[4]->GetWidth();
+
+    colliderPoints = {
+        Vector2D(-width / 2, height / 2),
+        Vector2D( width / 2, height / 2),
+        Vector2D( width / 2, 0),
+        Vector2D( width / 4, -height / 2),
+        Vector2D(-width / 4, -height / 2),
+        Vector2D(-width / 2, 0),
+    };
+
+     m_enemyTemplates[4]->GetColliderComponent()->SetPolygonCollider(6, colliderPoints);
+
+     // ENEMY 6
+    m_enemyTemplates[5] = new Enemy(m_renderer, m_assetManager, "enemy_polyon03", ColliderType::POLYGON);
+    m_enemyTemplates[5]->SetMovementPattern(MovementPattern::ZIGZAG);
+    m_enemyTemplates[5]->SetSpeed(GameSettings::ENEMY_BASE_SPEED * 1.2);
+    m_enemyTemplates[5]->SetRotationSpeed(0.0f);
+
+    m_enemyTemplates[5]->GetMovementComponent()->SetZigzagConfig(1.0f, 6.0f);
+
+    height = m_enemyTemplates[5]->GetHeight();
+    width = m_enemyTemplates[5]->GetWidth();
+
+    colliderPoints = {
+        Vector2D(-width / 2, -height / 2),
+        Vector2D(-width / 2,  height / 2),
+        Vector2D(0,           height / 2),
+        Vector2D(width / 2  ,   0),
+        Vector2D( width / 2, -height / 2)
+    };
+
+    m_enemyTemplates[5]->GetColliderComponent()->SetPolygonCollider(5, colliderPoints);     
+
 }
 
 void EnemySpawner::Update(float deltaTime) {
@@ -116,9 +188,17 @@ std::shared_ptr<Enemy> EnemySpawner::SpawnEnemy(int templateIndex) {
     Vector2D spawnPos = GetRandomSpawnPosition();
     enemy->SetInitialPosition(spawnPos);
     
-    enemy->SetMovementPattern(templateEnemy->GetMovementComponent()->GetPattern());
+    MovementPattern pattern = templateEnemy->GetMovementComponent()->GetPattern();
+    enemy->SetMovementPattern(pattern);
     enemy->SetSpeed(templateEnemy->GetMovementComponent()->GetSpeed());
     enemy->SetRotationSpeed(templateEnemy->GetRotationComponent()->GetRotationSpeed());
+   
+    if (pattern == MovementPattern::ZIGZAG) {
+        float amplitudeRatio = templateEnemy->GetMovementComponent()->GetAmplitudeRatio();
+        float freqRatio = templateEnemy->GetMovementComponent()->GetFrequencyRatio();
+        
+        enemy->GetMovementComponent()->SetZigzagConfig(amplitudeRatio, freqRatio);
+    }
     
     switch (colliderType) {
         case ColliderType::CIRCLE: {

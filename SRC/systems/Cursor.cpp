@@ -26,6 +26,10 @@ void Cursor::Update() {
 void Cursor::Render() {
     if (!m_texture) return;
     
-    SDL_Rect destRect = { static_cast<int>(m_position.x), static_cast<int>(m_position.y - 10), 522 / 20, 771 / 20};
+    int width, height;
+
+    SDL_QueryTexture(m_texture, nullptr, nullptr, &width, &height);
+
+    SDL_Rect destRect = { static_cast<int>(m_position.x - width / 40), static_cast<int>(m_position.y - height / 40), 522 / 20, 771 / 20};
     SDL_RenderCopy(m_renderer, m_texture, nullptr, &destRect);
 }

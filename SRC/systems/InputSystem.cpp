@@ -13,7 +13,6 @@ void InputSystem::HandleEvents() {
     m_previousKeys = m_currentKeys;
     m_previousMouseButtons = m_currentMouseButtons;
     
-    // Update mouse position every frame regardless of events
     SDL_GetMouseState(&m_mouseX, &m_mouseY);
 
     while (SDL_PollEvent(&m_event)) {
@@ -93,7 +92,6 @@ bool InputSystem::IsMouseButtonJustReleased(Uint8 button) {
 }
 
 void InputSystem::GetMouseState(Vector2D& mousePosition) {
-    // Simply use the already updated mouse position
     mousePosition = Vector2D(m_mouseX, m_mouseY);
 }
 

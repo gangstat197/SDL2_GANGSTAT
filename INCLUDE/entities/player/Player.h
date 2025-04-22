@@ -3,6 +3,8 @@
 #include <entities/base/Entity.h>
 #include <systems/InputSystem.h>
 #include <managers/SoundManager.h>
+#include <utils/Timer.h>
+#include <deque>
 
 class Player : public Entity {
 public:
@@ -24,7 +26,7 @@ private:
     InputSystem* m_input;
     SoundManager* m_soundManager;
     bool m_isInvincible;
-    float m_invincibilityTimer;
+    Timer m_invincibilityTimer;
     float m_invincibilityDuration;
     
     float m_sizeReductionTimer;
@@ -36,4 +38,13 @@ private:
     bool m_isHit;
     float m_hitDuration;
     float m_hitTimer;
+
+    // Trail effect properties
+    std::deque<Vector2D> m_trailPositions;
+    int m_maxTrailLength;
+    float m_trailUpdateTime;
+    float m_trailTimer;
+    
+    void RenderTrail();
+    void UpdateTrail(float deltaTime);
 };

@@ -10,7 +10,7 @@
 
 class EnemySpawner {
 public:
-    static const int MAX_ENEMY_TYPES = 2;
+    static const int MAX_ENEMY_TYPES = 6;
     
     EnemySpawner(Renderer* renderer, AssetManager* assetManager);
     ~EnemySpawner();

@@ -28,8 +28,8 @@ bool Game::Init(const char* title, int width, int height) {
         return false;
     }
 
-
     SDL_ShowCursor(SDL_DISABLE);
+    SDL_SetRelativeMouseMode(SDL_TRUE);
     
     // Core components
     renderer = new Renderer(title, width, height);
@@ -85,13 +85,13 @@ void Game::LoadAssets() {
     assetManager->LoadTexture("hit_vignette", "assets/images/player/hit_vignette.png", renderer->GetSDLRenderer());
     
     // Load enemy textures
-    assetManager->LoadTexture("enemy_round", "assets/images/enemy/bacteria_round.png", renderer->GetSDLRenderer(), 0.8);
-    assetManager->LoadTexture("enemy_round01", "assets/images/enemy/bacteria_round01.png", renderer->GetSDLRenderer(), 0.6);
-    assetManager->LoadTexture("enemy_round02", "assets/images/enemy/bacteria_round02.png", renderer->GetSDLRenderer(), 0.8);
-    assetManager->LoadTexture("enemy_rectangle", "assets/images/enemy/bacteria_rectangle.png", renderer->GetSDLRenderer());
-    assetManager->LoadTexture("enemy_polyon01", "assets/images/enemy/bacteria_polygon01.png", renderer->GetSDLRenderer());
-    assetManager->LoadTexture("enemy_polyon02", "assets/images/enemy/bacteria_polygon02.png", renderer->GetSDLRenderer());
-    assetManager->LoadTexture("enemy_polyon03", "assets/images/enemy/bacteria_polygon03.png", renderer->GetSDLRenderer());
+    assetManager->LoadTexture("enemy_round", "assets/images/enemy/bacteria_round.png", renderer->GetSDLRenderer(), 1);
+    assetManager->LoadTexture("enemy_round01", "assets/images/enemy/bacteria_round01.png", renderer->GetSDLRenderer(), 0.8);
+    assetManager->LoadTexture("enemy_round02", "assets/images/enemy/bacteria_round02.png", renderer->GetSDLRenderer(), 0.6);
+    assetManager->LoadTexture("enemy_rectangle", "assets/images/enemy/bacteria_rectangle.png", renderer->GetSDLRenderer(), 0.8);
+    assetManager->LoadTexture("enemy_polyon01", "assets/images/enemy/bacteria_polygon01.png", renderer->GetSDLRenderer(), 0.8);
+    assetManager->LoadTexture("enemy_polyon02", "assets/images/enemy/bacteria_polygon02.png", renderer->GetSDLRenderer(), 0.5);
+    assetManager->LoadTexture("enemy_polyon03", "assets/images/enemy/bacteria_polygon03.png", renderer->GetSDLRenderer(), 0.5);
     
     // Load music
     assetManager->LoadMusic("main_theme", "assets/sounds/main_theme.mp3");
@@ -132,6 +132,14 @@ void Game::HandleEvents() {
     if (input->IsQuitRequested()) {
         stateManager->SwitchState(GameStates::QUIT);
     }
+
+    if (input->IsKeyJustPressed(SDLK_ESCAPE)) {
+        SDL_SetRelativeMouseMode(SDL_FALSE);
+    }
+    
+    if (input->IsMouseButtonJustPressed(SDL_BUTTON_LEFT)) {
+        SDL_SetRelativeMouseMode(SDL_TRUE);
+    }
 }
 
 void Game::Render() {
@@ -144,6 +152,8 @@ void Game::Render() {
 
 void Game::Update() {
     stateManager->Update();
+
+
 }
 
 void Game::Clean() {
