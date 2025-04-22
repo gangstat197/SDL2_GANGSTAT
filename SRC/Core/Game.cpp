@@ -93,9 +93,14 @@ void Game::LoadAssets() {
     assetManager->LoadTexture("enemy_polyon02", "assets/images/enemy/bacteria_polygon02.png", renderer->GetSDLRenderer(), 0.5);
     assetManager->LoadTexture("enemy_polyon03", "assets/images/enemy/bacteria_polygon03.png", renderer->GetSDLRenderer(), 0.5);
     
+    // Load Power-ups textures 
+    assetManager->LoadTexture("powerup_invincible", "assets/images/power_ups/pu_invincible.png", renderer->GetSDLRenderer(), 0.5);
+    assetManager->LoadTexture("powerup_midas", "assets/images/power_ups/pu_midas.png", renderer->GetSDLRenderer(), 0.5);
+    assetManager->LoadTexture("powerup_ant", "assets/images/power_ups/pu_size_reduction.png", renderer->GetSDLRenderer(), 0.5);
+
+
     // Load music
     assetManager->LoadMusic("main_theme", "assets/sounds/main_theme.mp3");
-
     // Load sound effects
     assetManager->LoadSound("button_click", "assets/sounds/button_click.wav");
     assetManager->LoadSound("button_hover", "assets/sounds/button_hover.wav");

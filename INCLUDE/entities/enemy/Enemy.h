@@ -3,6 +3,7 @@
 #include <entities/base/Entity.h>
 #include <entities/base/Movement.h>
 #include <functional>
+#include <deque>
 
 class Player;
 
@@ -27,4 +28,14 @@ public:
 protected:
     // Helper methods
     void CheckOffScreen();
+    
+private:
+    // Trail effect properties
+    std::deque<Vector2D> m_trailPositions;
+    int m_maxTrailLength;
+    float m_trailUpdateTime;
+    float m_trailTimer;
+    
+    void UpdateTrail(float deltaTime);
+    void RenderTrail();
 };
