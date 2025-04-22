@@ -77,7 +77,7 @@ void Game::LoadAssets() {
     // Load Background texture
     assetManager->LoadTexture("background", "assets/images/background_universe.png", renderer->GetSDLRenderer());
 
-    // Load Heading texture with scaling
+    // Load Heading Texture
     SDL_Texture* headingTexture = assetManager->LoadTexture("heading", "assets/images/MicroDash_Hero.png", renderer->GetSDLRenderer(), 0.25);
     if (!headingTexture) {
         std::cout << "Failed to load heading texture\n";
@@ -87,16 +87,19 @@ void Game::LoadAssets() {
     // Load cursor texture
     assetManager->LoadTexture("mouse_cursor", "assets/images/cursor_yellow.png", renderer->GetSDLRenderer());
     
-    // Load UI textures with scaling
+    // Load UI textures
     assetManager->LoadTexture("button_play", "assets/images/ui/btn_play.png", renderer->GetSDLRenderer(), 0.25);
     assetManager->LoadTexture("button_options", "assets/images/ui/btn_options.png", renderer->GetSDLRenderer(), 0.25);
     assetManager->LoadTexture("button_quit", "assets/images/ui/btn_quit.png", renderer->GetSDLRenderer(), 0.25);
-    assetManager->LoadTexture("button_back", "assets/images/ui/btn_back.png", renderer->GetSDLRenderer(), 0.25);
-    assetManager->LoadTexture("button_reset", "assets/images/ui/btn_reset.png", renderer->GetSDLRenderer(), 0.25);
-    assetManager->LoadTexture("highscore_title", "assets/images/ui/highscore_title.png", renderer->GetSDLRenderer(), 0.25);
+    assetManager->LoadTexture("button_back", "assets/images/ui/btn_back.png", renderer->GetSDLRenderer(), 0.2);
+    assetManager->LoadTexture("button_reset", "assets/images/ui/btn_reset.png", renderer->GetSDLRenderer(), 0.2);
+    assetManager->LoadTexture("highscore_title", "assets/images/ui/highscore_title.png", renderer->GetSDLRenderer(), 0.5);
+    assetManager->LoadTexture("button_mute", "assets/images/ui/btn_mute.png", renderer->GetSDLRenderer());
+    assetManager->LoadTexture("button_unmute", "assets/images/ui/btn_unmute.png", renderer->GetSDLRenderer());
+    
     assetManager->LoadTexture("debug_position", "assets/images/debug/debug_reddot.png", renderer->GetSDLRenderer(), 0.5);
 
-    // Load player texture with scaling
+    // Load player texture 
     assetManager->LoadTexture("player", "assets/images/player/mr_square.png", renderer->GetSDLRenderer(), 0.15);
 
     // Load hit effect

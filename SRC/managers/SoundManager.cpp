@@ -57,6 +57,7 @@ void SoundManager::Shutdown() {
     m_initialized = false;
 }
 
+
 void SoundManager::PlayMusic(const std::string& musicId, int loops) {
     if (!m_initialized || !m_musicEnabled) return;
     
@@ -192,8 +193,8 @@ void SoundManager::SetMusicEnabled(bool enabled) {
     
     if (!m_musicEnabled) {
         StopMusic();
-    } else if (!m_currentMusicId.empty()) {
-        PlayMusic(m_currentMusicId);
+    } else {
+        PlayMusic("main_theme", -1);
     }
 }
 

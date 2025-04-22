@@ -101,63 +101,63 @@ Vector2D Collider::GetPosition() const {
 }
 
 void Collider::SetColliderType(ColliderType type) {
-    m_colliderType = type;
+  m_colliderType = type;
 }
 
 void Collider::SetPolygonCollider(int numPoints, const std::vector<Vector2D>& points) {
-    SetColliderType(ColliderType::POLYGON);
-    if (!points.empty()) {
-        m_originalPoints.clear();
-        m_points.clear();
-        
-        m_originalPoints = points;
-        m_points = points;
-        
-        if (m_owner) {
-            UpdateRotation();
-        }
+  SetColliderType(ColliderType::POLYGON);
+  if (!points.empty()) {
+    m_originalPoints.clear();
+    m_points.clear();
+    
+    m_originalPoints = points;
+    m_points = points;
+    
+    if (m_owner) {
+      UpdateRotation();
     }
+  }
 }
 
 void Collider::SetCircleCollider(float radius) {
-    SetColliderType(ColliderType::CIRCLE);
-    m_radius = radius;
+  SetColliderType(ColliderType::CIRCLE);
+  m_radius = radius;
 }
 
 void Collider::RenderColliderDebug() {
-    if (!m_owner) return;
-    
-    SDL_Renderer* renderer = m_owner->GetRenderer()->GetSDLRenderer();
-    
-    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-    
-    if (m_colliderType == ColliderType::CIRCLE) {
-        const int segments = 32;
-        for (int i = 0; i < segments; i++) {
-            float angle1 = (float)i / segments * 2 * M_PI;
-            float angle2 = (float)(i + 1) / segments * 2 * M_PI;
-            
-            int x1 = static_cast<int>(m_owner->GetPosition().x + cos(angle1) * m_radius);
-            int y1 = static_cast<int>(m_owner->GetPosition().y + sin(angle1) * m_radius);
-            int x2 = static_cast<int>(m_owner->GetPosition().x + cos(angle2) * m_radius);
-            int y2 = static_cast<int>(m_owner->GetPosition().y + sin(angle2) * m_radius);
-            
-            SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
-        }
-    } else if (m_colliderType == ColliderType::POLYGON) {
-        Vector2D center = m_owner->GetPosition();
-        
-        for (size_t i = 0; i < m_points.size(); i++) {
-            size_t next = (i + 1) % m_points.size();
-            
-            int x1 = static_cast<int>(m_points[i].x);
-            int y1 = static_cast<int>(m_points[i].y);
-            int x2 = static_cast<int>(m_points[next].x);
-            int y2 = static_cast<int>(m_points[next].y);
-            
-            SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
-        }
+  if (!m_owner) return;
+  
+  SDL_Renderer* renderer = m_owner->GetRenderer()->GetSDLRenderer();
+  
+  SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+  
+  if (m_colliderType == ColliderType::CIRCLE) {
+    const int segments = 32;
+    for (int i = 0; i < segments; i++) {
+      float angle1 = (float)i / segments * 2 * M_PI;
+      float angle2 = (float)(i + 1) / segments * 2 * M_PI;
+      
+      int x1 = static_cast<int>(m_owner->GetPosition().x + cos(angle1) * m_radius);
+      int y1 = static_cast<int>(m_owner->GetPosition().y + sin(angle1) * m_radius);
+      int x2 = static_cast<int>(m_owner->GetPosition().x + cos(angle2) * m_radius);
+      int y2 = static_cast<int>(m_owner->GetPosition().y + sin(angle2) * m_radius);
+      
+      SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
     }
+  } else if (m_colliderType == ColliderType::POLYGON) {
+    Vector2D center = m_owner->GetPosition();
+    
+    for (size_t i = 0; i < m_points.size(); i++) {
+      size_t next = (i + 1) % m_points.size();
+      
+      int x1 = static_cast<int>(m_points[i].x);
+      int y1 = static_cast<int>(m_points[i].y);
+      int x2 = static_cast<int>(m_points[next].x);
+      int y2 = static_cast<int>(m_points[next].y);
+      
+      SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
+    }
+  }
 }
 
 bool Collider::CheckCollision(Collider* playerCollider) {

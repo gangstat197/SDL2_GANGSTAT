@@ -63,6 +63,28 @@ void MenuState::Init() {
             RequestStateChange(GameStates::QUIT);
         }
     );
+
+    auto muteButton = std::make_shared<Button>(
+        m_renderer,
+        m_assetManager,
+        m_input,
+        "button_mute",
+        [this]() {
+            m_soundManager->SetMusicEnabled(false);
+            m_soundManager->SetSoundEnabled(false);
+        }
+    );
+
+    auto unmuteButton = std::make_shared<Button>(
+        m_renderer,
+        m_assetManager,
+        m_input,
+        "button_unmute",
+        [this]() {
+            m_soundManager->SetMusicEnabled(true);
+            m_soundManager->SetSoundEnabled(true);
+        }
+    );
     
     int screenWidth = GameSettings::SCREEN_WIDTH;
     int screenHeight = GameSettings::SCREEN_HEIGHT;
@@ -81,20 +103,42 @@ void MenuState::Init() {
     optionsButton->SetPosition(screenWidth/2 - optionsButton->GetRect().w/2, startY + buttonHeight + spacing + offSetY);
     quitButton->SetPosition(screenWidth/2 - quitButton->GetRect().w/2, startY + (buttonHeight + spacing) * 2 + offSetY);
     
+    int marginX = static_cast<int>(screenWidth * 0.1);
+    int marginY = static_cast<int>(screenHeight * 0.1); 
+    
+    int muteButtonWidth = m_assetManager->GetTextureWidth("button_mute");
+    int muteButtonHeight = m_assetManager->GetTextureHeight("button_mute");
+    
+    int unmuteButtonWidth = m_assetManager->GetTextureWidth("button_unmute");
+    int unmuteButtonHeight = m_assetManager->GetTextureHeight("button_unmute");
+    
+    // Place buttons side by side
+    muteButton->SetPosition(screenWidth - marginX - muteButtonWidth - 10 - unmuteButtonWidth, 
+                          screenHeight - marginY - muteButtonHeight);
+    
+    unmuteButton->SetPosition(screenWidth - marginX - unmuteButtonWidth, 
+                            screenHeight - marginY - unmuteButtonHeight);
+    
     headingButton->SetHoverSound("button_hover");
     
     playButton->SetHoverSound("button_hover");
     optionsButton->SetHoverSound("button_hover");
     quitButton->SetHoverSound("button_hover");
+    muteButton->SetHoverSound("button_hover");
+    unmuteButton->SetHoverSound("button_hover");
 
     playButton->SetClickSound("button_click");
     optionsButton->SetClickSound("button_click");
     quitButton->SetClickSound("button_click");
+    muteButton->SetClickSound("button_click");
+    unmuteButton->SetClickSound("button_click");
 
     m_uiManager->AddComponent(headingButton);
     m_uiManager->AddComponent(playButton);
     m_uiManager->AddComponent(optionsButton);
     m_uiManager->AddComponent(quitButton);
+    m_uiManager->AddComponent(muteButton);
+    m_uiManager->AddComponent(unmuteButton);
 }
 
 void MenuState::HandleEvents() {

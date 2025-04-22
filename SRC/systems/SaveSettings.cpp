@@ -4,34 +4,29 @@
 #include <algorithm>
 
 SaveSettings::SaveSettings(const std::string& filename) 
-    : m_filename(filename) {
+  : m_filename(filename) {
 }
 
 SaveSettings::~SaveSettings() {
 }
 
 bool SaveSettings::SaveHighScore(int score) {
-    // Load existing scores
-    std::vector<int> scores = LoadScoresFromFile();
-    
-    // Add new score
-    scores.push_back(score);
-    
-    // Sort in descending order
-    std::sort(scores.begin(), scores.end(), std::greater<int>());
-    
-    // Save back to file
-    return SaveScoresToFile(scores);
+  std::vector<int> scores = LoadScoresFromFile();
+  
+  scores.push_back(score);
+  
+  std::sort(scores.begin(), scores.end(), std::greater<int>());
+
+  return SaveScoresToFile(scores);
 }
 
 std::vector<int> SaveSettings::GetTopScores(int count) {
   std::vector<int> scores = LoadScoresFromFile();
   
-  // Sort in descending order
   std::sort(scores.begin(), scores.end(), std::greater<int>());
   
   if (scores.size() > static_cast<size_t>(count)) {
-      scores.resize(count);
+    scores.resize(count);
   }
   
   return scores;

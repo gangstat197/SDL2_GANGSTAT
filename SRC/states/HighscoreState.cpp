@@ -72,21 +72,9 @@ void HighscoreState::SetupUI() {
   // Create textures using GetTextTexture
   SDL_Texture* titleTexture = m_assetManager->GetTexture("highscore_title");
   
-  SDL_Texture* backTexture = m_assetManager->GetTextTexture(
-    "button_back",
-    "BACK TO MENU",
-    {255, 255, 255, 255},
-    "game_font",
-    24
-  );
+  SDL_Texture* backTexture = m_assetManager->GetTexture("button_back");
   
-  SDL_Texture* resetTexture = m_assetManager->GetTextTexture(
-    "button_reset",
-    "RESET SCORES",
-    {255, 100, 100, 255},
-    "game_font",
-    24
-  );
+  SDL_Texture* resetTexture = m_assetManager->GetTexture("button_reset");
   
   int titleWidth, titleHeight;
   SDL_QueryTexture(titleTexture, NULL, NULL, &titleWidth, &titleHeight);
@@ -98,7 +86,7 @@ void HighscoreState::SetupUI() {
   
   int resetButtonWidth, resetButtonHeight;
   SDL_QueryTexture(resetTexture, NULL, NULL, &resetButtonWidth, &resetButtonHeight);
-  resetButton->SetPosition(screenWidth/2 - resetButtonWidth/2, screenHeight - 150);
+  resetButton->SetPosition(screenWidth/2 - resetButtonWidth/2, screenHeight - 160);
   
   // Set sound effects for buttons
   backButton->SetHoverSound("button_hover");
@@ -144,7 +132,7 @@ void HighscoreState::DisplayHighScores() {
   
   m_topScores = m_saveSettings.GetTopScores(m_displayCount);
   
-  int yOffset = 180;
+  int yOffset = 300;
   int index = 0;
   
   for (int score : m_topScores) {
@@ -156,7 +144,7 @@ void HighscoreState::DisplayHighScores() {
       scoreText,
       {255, 255, 255, 255},
       "game_font",
-      24
+      28
     );
     
     if (scoreTexture) {

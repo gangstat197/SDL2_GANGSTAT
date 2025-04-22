@@ -10,7 +10,7 @@
 
 class PowerUpSpawner {
 public:
-    static const int POWERUP_TYPES = 3; // Invincible, Size Reduction, Point Multiplier
+    static const int POWERUP_TYPES = 3;
     
     PowerUpSpawner(Renderer* renderer, AssetManager* assetManager);
     ~PowerUpSpawner();
