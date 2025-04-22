@@ -283,3 +283,42 @@ SDL_Texture* AssetManager::LoadTexture(const std::string& assetId, const std::st
     return scaledTexture;
 }
 
+SDL_Texture* AssetManager::GetTextTexture(const std::string& textId, const std::string& text, SDL_Color color, 
+                                         const std::string& fontId, int fontSize) {
+    // Check if the texture already exists
+    auto it = m_textureMap.find(textId);
+    if (it != m_textureMap.end()) {
+        // Remove existing texture to create a new one
+        SDL_DestroyTexture(it->second);
+        m_textureMap.erase(it);
+    }
+    
+    // Get the font
+    TTF_Font* font = GetFont(fontId);
+    if (!font) {
+        std::cerr << "AssetManager::GetTextTexture - Font not found: " << fontId << std::endl;
+        return nullptr;
+    }
+    
+    // Create the text surface
+    SDL_Surface* textSurface = TTF_RenderText_Blended(font, text.c_str(), color);
+    if (!textSurface) {
+        std::cerr << "AssetManager::GetTextTexture - Failed to render text: " << TTF_GetError() << std::endl;
+        return nullptr;
+    }
+    
+    // Convert surface to texture
+    SDL_Renderer* renderer = SDL_GetRenderer(SDL_GetWindowFromID(1));  // Get the first window's renderer
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, textSurface);
+    SDL_FreeSurface(textSurface);
+    
+    if (!texture) {
+        std::cerr << "AssetManager::GetTextTexture - Failed to create texture: " << SDL_GetError() << std::endl;
+        return nullptr;
+    }
+    
+    // Add the texture to the map
+    m_textureMap[textId] = texture;
+    return texture;
+}
+

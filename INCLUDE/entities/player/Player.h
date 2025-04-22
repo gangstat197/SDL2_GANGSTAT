@@ -24,6 +24,16 @@ public:
     
     void SaveOriginalColliderData();
     
+    void SetPointMultiplier(float duration);
+    float GetPointMultiplier();
+
+    // Health system
+    void RenderHealth();
+    int GetHealth() const;
+    void SetHealth(int health);
+    bool IsAlive() const;
+    void Reset();
+    
 private:
     InputSystem* m_input;
     SoundManager* m_soundManager;
@@ -31,6 +41,9 @@ private:
     Timer m_invincibilityTimer;
     float m_invincibilityDuration;
     
+    float m_pointMultiplierTimer;
+    float m_currentMultiplier;
+
     float m_sizeReductionTimer;
     float m_originalScale;
     bool m_wasScaled;
@@ -44,6 +57,10 @@ private:
     bool m_isHit;
     float m_hitDuration;
     float m_hitTimer;
+    
+    // Health system
+    int m_health;
+    const int MAX_HEALTH = 3;
 
     // Trail effect properties
     std::deque<Vector2D> m_trailPositions;

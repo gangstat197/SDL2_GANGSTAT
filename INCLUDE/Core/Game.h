@@ -13,6 +13,7 @@
 #include <states/MenuState.h>
 #include <states/PlayingState.h>
 #include <states/QuitState.h>
+#include <states/HighscoreState.h>
 
 class Game {
 public:
@@ -44,6 +45,7 @@ private:
     std::shared_ptr<MenuState> menuState;
     std::shared_ptr<PlayingState> playingState;
     std::shared_ptr<QuitState> quitState;
+    std::shared_ptr<HighscoreState> highscoreState;
 
     bool isRunning;
     int frameCount;

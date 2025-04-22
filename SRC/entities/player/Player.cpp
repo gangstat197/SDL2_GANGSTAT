@@ -17,9 +17,12 @@ Player::Player(Renderer* renderer, AssetManager* assetManager, InputSystem* inpu
       m_isHit(false),
       m_hitDuration(0.0f),
       m_hitTimer(0.0f),
+      m_health(MAX_HEALTH),  // Explicitly initialize health to MAX_HEALTH
       m_maxTrailLength(10),
       m_trailUpdateTime(0.02f),
-      m_trailTimer(0.0f) {
+      m_trailTimer(0.0f),
+      m_currentMultiplier(1.0f),
+      m_pointMultiplierTimer(0.0f) {
     
     m_originalScale = m_scale;
     SaveOriginalColliderData();
@@ -65,7 +68,24 @@ void Player::Update(float deltaTime) {
         }
     }
 
+    if (m_pointMultiplierTimer > 0.0f) {
+        m_pointMultiplierTimer -= deltaTime;
+
+        if (m_pointMultiplierTimer <= 0.0f) {
+            m_currentMultiplier = 1.0f;
+        }
+    }
+
     Entity::Update(deltaTime);
+}
+
+void Player::SetPointMultiplier(float duration) {
+    m_pointMultiplierTimer = duration;
+    m_currentMultiplier = 2.5f;
+}
+
+float Player::GetPointMultiplier() {
+    return m_currentMultiplier;
 }
 
 void Player::Render() {
@@ -93,7 +113,10 @@ void Player::Render() {
             SDL_RenderCopy(m_renderer->GetSDLRenderer(), hit_vignette, NULL, NULL);
         }
     }
+    
+    RenderHealth();
 }
+
 
 void Player::UpdateTrail(float deltaTime) {
     m_trailTimer += deltaTime;
@@ -221,6 +244,8 @@ void Player::Hit() {
     if (!m_isInvincible) {
         SetInvincible(true, 1.0f);
         
+        m_health = std::max(0, m_health - 1);
+        
         if (m_soundManager) {
             m_soundManager->PlaySound("player_hit");
         }
@@ -229,4 +254,83 @@ void Player::Hit() {
         m_hitDuration = 0.5f;
         m_hitTimer = 0.0f;
     }
+}
+
+void Player::RenderHealth() {
+    SDL_Texture* heartTexture = m_assetManager->GetTexture("heart");
+    if (!heartTexture) return;
+    
+    if (m_health < 0 || m_health > MAX_HEALTH) {
+        m_health = MAX_HEALTH; 
+    }
+    
+    SDL_Renderer* sdlRenderer = m_renderer->GetSDLRenderer();
+    int heartWidth = 32;
+    int heartHeight = 32;
+    int padding = 5;
+    
+    static int lastHealth = -1;
+    if (m_health != lastHealth) {
+        lastHealth = m_health;
+        m_assetManager->GetTextTexture(
+            "health_text",
+            "Health: " + std::to_string(m_health),
+            {255, 255, 255, 255},
+            "game_font",
+            18
+        );
+    }
+    
+    for (int i = 0; i < m_health && i < MAX_HEALTH; i++) {
+        SDL_Rect destRect = {
+            10 + padding + i * (heartWidth + padding),
+            padding,
+            heartWidth,
+            heartHeight
+        };
+        
+        SDL_RenderCopy(sdlRenderer, heartTexture, NULL, &destRect);
+    }
+    
+    SDL_Texture* fontTexture = m_assetManager->GetTexture("health_text");
+    if (fontTexture) {
+        int textWidth, textHeight;
+        SDL_QueryTexture(fontTexture, NULL, NULL, &textWidth, &textHeight);
+        
+        SDL_Rect textRect = {
+            10 + padding,
+            padding + heartHeight + 5,
+            textWidth,
+            textHeight
+        };
+        
+        SDL_RenderCopy(sdlRenderer, fontTexture, NULL, &textRect);
+    }
+
+
+}
+
+int Player::GetHealth() const {
+    return m_health;
+}
+
+void Player::SetHealth(int health) {
+    m_health = std::min(MAX_HEALTH, std::max(0, health));
+}
+
+bool Player::IsAlive() const {
+    return m_health > 0;
+}
+
+void Player::Reset() {
+    // Explicitly set health to MAX_HEALTH
+    m_health = MAX_HEALTH;
+    m_isInvincible = false;
+    m_isHit = false;
+    
+    if (m_sizeReductionTimer > 0.0f) {
+        ResetSize();
+    }
+    
+    m_trailPositions.clear();
 }

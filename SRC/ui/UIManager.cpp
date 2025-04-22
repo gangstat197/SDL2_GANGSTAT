@@ -37,12 +37,8 @@ void UIManager::Render() {
 }
 
 void UIManager::HandleEvents() {
-    // Components are processed in order (last added gets priority)
-    // We iterate in reverse to give top-most components priority
     for (auto it = m_components.rbegin(); it != m_components.rend(); ++it) {
         if ((*it)->HandleEvent()) {
-            // If a component handled the event, stop processing
-            // This prevents click-through to components beneath
             break;
         }
     }

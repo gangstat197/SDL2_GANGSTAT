@@ -165,7 +165,7 @@ void PowerUp::ApplyEffect(Player* player) {
             break;
             
         case PowerUpType::POINT_MULTIPLIER:
-            std::cout << "Point multiplier power-up collected" << std::endl;
+            player->SetPointMultiplier(5.0f);
             break;
     }
     

@@ -50,7 +50,7 @@ void MenuState::Init() {
         m_input, 
         "button_options", 
         [this]() {
-            std::cout << "Options button clicked\n";
+            RequestStateChange(GameStates::HIGHSCORE);
         }
     );
     

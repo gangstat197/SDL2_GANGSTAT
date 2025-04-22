@@ -13,7 +13,8 @@ enum class GameStates {
     PLAYING,
     WIN,
     DEAD,
-    QUIT
+    QUIT,
+    HIGHSCORE,
 };
 
 class State {

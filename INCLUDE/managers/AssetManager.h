@@ -23,6 +23,10 @@ public:
     SDL_Texture* ScaleTexture(const std::string& assetId, SDL_Texture& texture, SDL_Renderer* renderer, double ratio);
 
     void UnloadTexture(const std::string& assetId);
+    
+    // Text Rendering methods
+    SDL_Texture* GetTextTexture(const std::string& textId, const std::string& text, SDL_Color color, 
+                               const std::string& fontId = "game_font", int fontSize = 18);
 
     TTF_Font* LoadFont(const std::string& fontId, const std::string& filePath, int fontSize);
     void AddFont(const std::string& fontId, TTF_Font* font);

@@ -6,6 +6,12 @@
 #include <entities/player/Player.h>
 #include <entities/powerup/PowerUpSpawner.h>
 #include <utils/Timer.h>
+#include <systems/SaveSettings.h>
+
+enum class PlayState {
+    PLAYING,
+    GAME_OVER
+};
 
 class PlayingState : public State {
 public:
@@ -22,11 +28,24 @@ private:
     void InitPlayer();
     void InitEnemySpawner();
     void InitPowerUpSpawner();
+    void CheckGameOver();
+    void RenderGameOver();
+    void Reset();
+
+    void RenderScore();
+    void SaveHighScore();
 
     EnemySpawner* m_enemySpawner;
     PowerUpSpawner* m_powerUpSpawner;
     Player* m_player;
     
+    PlayState m_playState;
+    
     Timer m_gameTimer;
+    Timer m_gameOverTimer;
     float m_deltaTime;
+    float m_currentTime;
+    int m_finalScore;
+    SaveSettings m_saveSettings;
+    bool m_scoreWasSaved;
 };
