@@ -20,7 +20,7 @@ namespace GameSettings {
     inline constexpr int DIFFICULTY_INCREASE_TIME_MS = 10000;  
     
     // Power-up settings
-    inline constexpr float POWERUP_SPAWN_CHANCE = 0.1f;  
+    inline constexpr float POWERUP_SPAWN_CHANCE = 0.4f;  
     inline constexpr int POWERUP_DURATION_MS = 5000;  
     
     // Scoring

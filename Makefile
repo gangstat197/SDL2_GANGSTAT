@@ -9,11 +9,12 @@ SOURCES = main.cpp \
 	$(wildcard src/entities/base/*.cpp) \
 	$(wildcard src/entities/enemy/*.cpp) \
 	$(wildcard src/entities/player/*.cpp) \
+	$(wildcard src/entities/powerup/*.cpp) \
 	$(wildcard src/managers/*.cpp) \
 	$(wildcard src/states/*.cpp) \
 	$(wildcard src/systems/*.cpp) \
 	$(wildcard src/ui/*.cpp) \
-	$(wildcard src/utils/*.cpp)
+	$(wildcard src/utils/*.cpp) 
 
 # Default target - builds the game with all source files
 all:

@@ -11,6 +11,7 @@ Player::Player(Renderer* renderer, AssetManager* assetManager, InputSystem* inpu
       m_invincibilityDuration(0.0f),
       m_sizeReductionTimer(0.0f),
       m_originalScale(1.0f),
+      m_wasScaled(false),
       m_blinkTimer(0.0f),
       m_isVisible(true),
       m_isHit(false),
@@ -21,6 +22,7 @@ Player::Player(Renderer* renderer, AssetManager* assetManager, InputSystem* inpu
       m_trailTimer(0.0f) {
     
     m_originalScale = m_scale;
+    SaveOriginalColliderData();
 }
 
 Player::~Player() {
@@ -178,19 +180,41 @@ void Player::SetInvincible(bool invincible, float duration) {
 void Player::ApplySizeReduction(float reductionFactor, float duration) {
     if (m_sizeReductionTimer <= 0.0f) {
         m_originalScale = m_scale;
+        SaveOriginalColliderData();
+        m_wasScaled = true;
     }
     
-    m_scale = m_originalScale * reductionFactor;
+    SetScale(m_originalScale * reductionFactor);
     m_sizeReductionTimer = duration;
-    
-    UpdateCollider();
 }
 
 void Player::ResetSize() {
-    m_scale = m_originalScale;
+    SetScale(m_originalScale);
     m_sizeReductionTimer = 0.0f;
     
-    UpdateCollider();
+    if (m_wasScaled) {
+        RestoreOriginalCollider();
+        m_wasScaled = false;
+    }
+}
+
+void Player::SaveOriginalColliderData() {
+    if (m_collider) {
+        m_originalColliderType = m_collider->GetColliderType();
+        m_originalRadius = m_collider->GetRadius();
+        m_originalColliderPoints = m_collider->GetPolygonPoints();
+    }
+}
+
+void Player::RestoreOriginalCollider() {
+    if (m_collider) {
+        if (m_originalColliderType == ColliderType::CIRCLE) {
+            m_collider->SetCircleCollider(m_originalRadius);
+        } else if (m_originalColliderType == ColliderType::POLYGON) {
+            m_collider->SetPolygonCollider(m_originalColliderPoints.size(), m_originalColliderPoints);
+        }
+        UpdateCollider();
+    }
 }
 
 void Player::Hit() {

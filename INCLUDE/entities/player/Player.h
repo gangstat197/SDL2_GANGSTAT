@@ -22,6 +22,8 @@ public:
     void ApplySizeReduction(float reductionFactor, float duration);
     void ResetSize();
     
+    void SaveOriginalColliderData();
+    
 private:
     InputSystem* m_input;
     SoundManager* m_soundManager;
@@ -31,6 +33,10 @@ private:
     
     float m_sizeReductionTimer;
     float m_originalScale;
+    bool m_wasScaled;
+    ColliderType m_originalColliderType;
+    float m_originalRadius;
+    std::vector<Vector2D> m_originalColliderPoints;
     
     float m_blinkTimer;
     bool m_isVisible;
@@ -47,4 +53,5 @@ private:
     
     void RenderTrail();
     void UpdateTrail(float deltaTime);
+    void RestoreOriginalCollider();
 };

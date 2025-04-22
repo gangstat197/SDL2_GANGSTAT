@@ -107,6 +107,9 @@ void Collider::SetColliderType(ColliderType type) {
 void Collider::SetPolygonCollider(int numPoints, const std::vector<Vector2D>& points) {
     SetColliderType(ColliderType::POLYGON);
     if (!points.empty()) {
+        m_originalPoints.clear();
+        m_points.clear();
+        
         m_originalPoints = points;
         m_points = points;
         

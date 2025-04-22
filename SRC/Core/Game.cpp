@@ -105,6 +105,7 @@ void Game::LoadAssets() {
     assetManager->LoadSound("button_click", "assets/sounds/button_click.wav");
     assetManager->LoadSound("button_hover", "assets/sounds/button_hover.wav");
     assetManager->LoadSound("player_hit", "assets/sounds/hit.wav");
+    assetManager->LoadSound("power_up", "assets/sounds/power_up.wav");
 
     // Set Sound Manager Volume and state based on settings
     soundManager->SetMusicVolume(static_cast<int>(GameSettings::MUSIC_VOLUME * MIX_MAX_VOLUME));  

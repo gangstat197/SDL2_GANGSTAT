@@ -6,6 +6,7 @@ PlayingState::PlayingState(Renderer* renderer, AssetManager* assetManager, Input
     : State(renderer, assetManager, input, soundManager),
       m_player(nullptr),
       m_enemySpawner(nullptr),
+      m_powerUpSpawner(nullptr),
       m_deltaTime(0.016f) {
 }
 
@@ -18,6 +19,11 @@ PlayingState::~PlayingState() {
     if (m_enemySpawner) {
         delete m_enemySpawner;
         m_enemySpawner = nullptr;
+    }
+    
+    if (m_powerUpSpawner) {
+        delete m_powerUpSpawner;
+        m_powerUpSpawner = nullptr;
     }
 }
 
@@ -35,12 +41,20 @@ void PlayingState::InitPlayer() {
     };
 
     m_player->GetColliderComponent()->SetPolygonCollider(4, playerColliderPoints);
+    
+    dynamic_cast<Player*>(m_player)->SaveOriginalColliderData();
+    
     m_player->SetPosition(GameSettings::SCREEN_WIDTH/2, GameSettings::SCREEN_HEIGHT - 100);
 }
 
 void PlayingState::InitEnemySpawner() {
     m_enemySpawner = new EnemySpawner(m_renderer, m_assetManager);
     m_enemySpawner->Initialize();
+}
+
+void PlayingState::InitPowerUpSpawner() {
+    m_powerUpSpawner = new PowerUpSpawner(m_renderer, m_assetManager);
+    m_powerUpSpawner->Initialize();
 }
 
 void PlayingState::Init() {
@@ -52,6 +66,7 @@ void PlayingState::Init() {
                          GameSettings::BACKGROUND_SCROLL_SPEED);
     InitPlayer();
     InitEnemySpawner();
+    InitPowerUpSpawner();
 
     m_gameTimer.Start();
 }
@@ -71,17 +86,24 @@ void PlayingState::Update() {
     
     m_player->Update(m_deltaTime);
     m_enemySpawner->Update(m_deltaTime);
+    m_powerUpSpawner->Update(m_deltaTime);
     
+    // Check for enemy collisions
     if (m_enemySpawner->CheckCollisions(m_player)) {
         std::cout << "Player hit by enemy!" << std::endl;
     }
-
+    
+    // Check for power-up collisions
+    if (m_powerUpSpawner->CheckCollisions(m_player)) {
+        std::cout << "Player collected a power-up!" << std::endl;
+    }
 }
 
 void PlayingState::Render() {
     m_backgroundManager->RenderBackground();
     m_backgroundManager->InfiniteBackground();
     
+    m_powerUpSpawner->Render(); // Render power-ups before enemies
     m_enemySpawner->Render();
     m_player->Render();
 }

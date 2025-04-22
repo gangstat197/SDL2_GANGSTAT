@@ -4,6 +4,7 @@
 #include <entities/enemy/EnemySpawner.h>
 #include <entities/enemy/Enemy.h>
 #include <entities/player/Player.h>
+#include <entities/powerup/PowerUpSpawner.h>
 #include <utils/Timer.h>
 
 class PlayingState : public State {
@@ -20,8 +21,10 @@ public:
 private: 
     void InitPlayer();
     void InitEnemySpawner();
+    void InitPowerUpSpawner();
 
     EnemySpawner* m_enemySpawner;
+    PowerUpSpawner* m_powerUpSpawner;
     Player* m_player;
     
     Timer m_gameTimer;

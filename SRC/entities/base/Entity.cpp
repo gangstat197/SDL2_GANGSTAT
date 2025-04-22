@@ -80,6 +80,23 @@ Vector2D Entity::GetPosition() const {
 
 void Entity::SetScale(float scale) {
     m_scale = scale;
+    if (m_collider) {
+        if (m_collider->GetColliderType() == ColliderType::CIRCLE) {
+            float scaledRadius = (m_width * m_scale) / 2.0f;
+            m_collider->SetCircleCollider(scaledRadius);
+        } else if (m_collider->GetColliderType() == ColliderType::POLYGON) {
+            std::vector<Vector2D> originalPoints = m_collider->GetPolygonPoints();
+            std::vector<Vector2D> scaledPoints;
+            
+            float scaleRatio = m_scale;
+            for (const auto& point : originalPoints) {
+                Vector2D scaledPoint = point * scaleRatio;
+                scaledPoints.push_back(scaledPoint);
+            }
+            
+            m_collider->SetPolygonCollider(scaledPoints.size(), scaledPoints);
+        }
+    }
     UpdateCollider();
 }
 
@@ -137,7 +154,14 @@ void Entity::SetNewCollider(Collider* newCollider) {
 }
 
 void Entity::UpdateCollider() {
+    if (!m_collider) return;
+    
     m_collider->Update();
+    
+    Vector2D currPos = m_collider->GetPosition();
+    if (currPos.x != m_position.x || currPos.y != m_position.y) {
+        m_collider->SetPosition(m_position);
+    }
 }
 
 void Entity::SetRotation(float degrees) {
