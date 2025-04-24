@@ -16,7 +16,7 @@
 - **Nền tảng:** PC.
 - **Ngôn ngữ / Thư viện sử dụng:** C++ / SDL2. 
 - **Tóm tắt:** Trong _Micro Dash_, người chơi sẽ phải dùng chuột điều khiển nhân vật để tránh né các loại **quái vật không gian**. Các loại quái vật nguy hiểm khác nhau về hình dạng, kích thước, hành vi, tốc độ. Trong quá trình chơi, người chơi có thể nhận được các **Nâng cấp đặc biệt** như giảm kích thước để dễ dàng tránh né, tăng lượng điểm nhận được, hoặc là bất tử. Càng ngày sẽ có càng nhiều quái vật xuất hiện, và _số điểm nhận được sẽ tỉ lệ thuận với thời gian sinh tồn_ của người chơi.
-- **Ngưỡng điểm:** 9 - 10.
+- **Ngưỡng điểm:** 10 - _Chấm ngày 23/04/2025_.
 
 ## III. Các điểm nổi bật của Game.
 ### 1. Kiến trúc Game Engine
