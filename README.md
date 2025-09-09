@@ -7,8 +7,8 @@
 
 ## I. Thông tin tác giả 
 - **Họ và tên:** Lê Đức Lưu 
-- **Mã số sinh viên:** 24021557
-- **Lớp:** K69I - CS1
+- **Mã số sinh viên:** 2402**57
+- **Lớp:** K69I - CS*
 
 ## II. Tổng quan 
 - **Video Demo Game:** [Micro Dash](https://youtu.be/4HtiXw1boTk). 
